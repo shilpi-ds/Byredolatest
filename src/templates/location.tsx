@@ -528,11 +528,7 @@ const Location: Template<ExternalApiRenderData> = ({
             ByredoLinks={_site.c_headerMenus}
           />
           
-        <BreadCrumbs
-          name={name}
-          parents={dm_directoryParents}
-          address={address}
-        ></BreadCrumbs>
+    
 
           <div className="hero mx-auto">
             <img
@@ -553,7 +549,11 @@ const Location: Template<ExternalApiRenderData> = ({
               </p>
             </div>
           </div>
-
+          <BreadCrumbs
+          name={name}
+          parents={dm_directoryParents}
+          address={address}
+        ></BreadCrumbs>
           <div className="store-time text-5xl text-center font-semibold mb-4">
             {hours && (
               <OpenCloseStatus
