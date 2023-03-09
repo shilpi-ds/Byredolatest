@@ -263,6 +263,7 @@ const region: Template<TemplateRenderProps> = ({
    // console.log(entity,"entity")
     if (typeof entity?.dm_directoryChildren != "undefined") {
     var country: any = entity?.address?.countryCode?.toLowerCase();
+    //console.log(country,"con");
       if (entity?.dm_directoryChildrenCount == 1) {
         entity?.dm_directoryChildren?.map((res: any) => {
          //console.log(res,"res")
@@ -283,7 +284,7 @@ const region: Template<TemplateRenderProps> = ({
 
         })
       } else {
-        detlslug = country+"/" + slug + "/" + entity.slug + ".html";
+        detlslug = "/" + slug + "/" + entity.slug + ".html";
       }
 
     }
