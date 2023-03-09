@@ -262,17 +262,18 @@ const region: Template<TemplateRenderProps> = ({
 
    // console.log(entity,"entity")
     if (typeof entity?.dm_directoryChildren != "undefined") {
-
+    var country: any = entity?.address?.countryCode?.toLowerCase();
       if (entity?.dm_directoryChildrenCount == 1) {
         entity?.dm_directoryChildren?.map((res: any) => {
          //console.log(res,"res")
           let detlslug1 = "";
+      
           var region: any = entity?.address?.region?.toLowerCase();
           var initialregion: any = region?.toString();
           var finalregion: any = initialregion?.replaceAll(" ", "-");
           if (!res.slug) {
             let slugString = res?.id+"-"+(res?.name.replace(/\s+/g,"-")).toLowerCase();
-            let slugi = "gb/" +finalregion+"/"+ entity.slug + "/" + slugString;
+            let slugi = country+"/" +finalregion+"/"+ entity.slug + "/" + slugString;
             detlslug1 = `${slugi}.html`;
           } else {
             detlslug1 = `${res.slug.toString()}.html`;
@@ -282,7 +283,7 @@ const region: Template<TemplateRenderProps> = ({
 
         })
       } else {
-        detlslug = "gb/" + slug + "/" + entity.slug + ".html";
+        detlslug = country+"/" + slug + "/" + entity.slug + ".html";
       }
 
     }

@@ -272,7 +272,8 @@ const country: Template<TemplateRenderProps> = ({
   const childrenDivs = dm_directoryChildren ? dm_directoryChildren.map((entity: any) => {
     let detlslug;
 
-//console.log(entity);
+//console.log(entity,"entity");
+var country: any = entity?.address?.countryCode?.toLowerCase();
 if (typeof entity.dm_directoryChildren != "undefined") {
   if (entity.dm_directoryChildrenCount == 1) {
     entity.dm_directoryChildren.map((res: any) => {
@@ -289,7 +290,7 @@ if (typeof entity.dm_directoryChildren != "undefined") {
 
       
        if (res.meta.entityType.id == 'ce_city') {
-        detlslug1 = "gb/" + detlslug1;
+        detlslug1 = country+"/" + detlslug1;
        } else {
          detlslug1 = detlslug1;
        }
