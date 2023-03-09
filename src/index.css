@@ -240,7 +240,7 @@ body .ps__rail-y:hover .ps__thumb-y {
 }
 
 .result-listing .buttons {
-  @apply max-w-xs mx-auto md:max-w-full justify-center lg:pl-9;
+  @apply max-w-xs mx-auto md:max-w-full justify-center lg:pl-9 lg:pr-9;
 }
 
 /* Search */

@@ -315,7 +315,7 @@ const City: Template<TemplateRenderProps> = ({
 
     return (
 
-      <div className="bg-white shadow-lg w-[21.875rem] box_shadow drop-shadow-md">
+      <div className="bg-white shadow-lg box_shadow drop-shadow-md">
                 {/* <p className="text-center">Near by stores</p> */}
 
         <div className="flex justify-between items-center pt-3 ml-4">
@@ -328,7 +328,7 @@ const City: Template<TemplateRenderProps> = ({
 
         <div className="flex mt-4 ml-4">
             {/* <img className="h-[25px]" src={loc1} alt=""/> */}
-            <div className="pl-4"><Address address={entity.address} /></div>
+            <div className="add-city"><Address address={entity.address} /></div>
           
         </div>
 
@@ -351,7 +351,7 @@ const City: Template<TemplateRenderProps> = ({
            </div>
            </div>
     }
-       <div className="buttons gap-y-[2px] sm:gap-y-2.5">
+       <div className="buttons gap-y-[2px] sm:gap-y-2.5 py-5 pr-[2.25rem]">
                         <div className="ctaBtn">
                             <Link
                               className="button before-icon"
@@ -444,7 +444,7 @@ const City: Template<TemplateRenderProps> = ({
         ></BreadCrumbs>
         <div className="content-list city-page">
           <div className="container mx-auto">
-            <div className="sec-title">
+            <div className="sec-title text-center">
               <h2>
               Byredo Stores in {name}
               </h2>

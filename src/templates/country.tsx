@@ -370,7 +370,7 @@ if (typeof entity.dm_directoryChildren != "undefined") {
             <div className="sec-title">
               <h2 style={{ textAlign: "center" }}>
                 {/* {StaticData.AllRegion} */}
-                 {regionNames.of(name)}{" "}
+                Byredo Stores in {regionNames.of(name)}{" "}
               </h2>
             </div>
 
