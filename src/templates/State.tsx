@@ -10,7 +10,8 @@ import {
   GetHeadConfig,
   HeadConfig,
 } from "@yext/pages";
-import favicon from "../images/favicon.png"
+import favicon from "../images/favicon.png";
+import { svgIcons } from "../svg icons/svgIcon";
 import Header from "../components/layouts/header";
 import Banner from "../components/commons/LocatorBanner";
 import Footer from "../components/layouts/footer";
@@ -308,25 +309,18 @@ const region: Template<TemplateRenderProps> = ({
             ByredoLogo={_site.c_byradoLogo}
             ByredoLinks={_site.c_headerMenus}
           />
-        {/* <BreadCrumbs
-          name={regionNames.of(name)}
-          address={address}
-          parents={dm_directoryParents}
-          baseUrl={relativePrefixToRoot}
-        ></BreadCrumbs> */}
-        {/* <div className="location-dtl">
-          <Banner name={regionNames.of(name)} c_bannerImage={bannerimage} />
-        </div> */}
-     <BreadCrumbs
-          name={name}
-          parents={dm_directoryParents}
-          address={address}
-        ></BreadCrumbs>
+       
+  
 <Banner
         BannerImage={_site.c_bannerImage}
         Title={_site.c_bannerTitle}
         Description={_site.c_bannerDescription}
       />
+         <BreadCrumbs
+          name={name}
+          parents={dm_directoryParents}
+          address={address}
+        ></BreadCrumbs>
 
           <div className="content-list">
             <div className="container">

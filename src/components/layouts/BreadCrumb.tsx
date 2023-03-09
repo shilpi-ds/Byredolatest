@@ -1,5 +1,6 @@
 import * as React from "react";
 import { slugify, BaseUrl } from "../../config/globalConfig";
+import { svgIcons } from "../../svg icons/svgIcon";
 import { Link } from "@yext/pages/components";
 type data = {
   name: any;
@@ -108,7 +109,7 @@ const BreadCrumbs = (props: data) => {
       <div className="container">
         <ul>
           <li>
-            <Link href="/index.html">Home</Link>
+            <Link href="/index.html">{svgIcons.homeIcon}</Link>
           </li>
           {list && (
             list)
