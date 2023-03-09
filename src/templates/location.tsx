@@ -157,19 +157,19 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
   var url = "";
    var name: any = document.name?.toLowerCase();
  // var mainPhones: any = result.rawData.mainPhone;
-  var country: any = document.address.countryCode?.toLowerCase();
-  var region: any = document.address.region
+  var country: any = document.address?.countryCode?.toLowerCase();
+  var region: any = document.address?.region
     ?.toLowerCase()
     .replaceAll(" ", "-");
-  var initialregion: any = region.toString();
-  var finalregion: any = initialregion.replaceAll(" ", "-");
+  var initialregion: any = region?.toString();
+  var finalregion: any = initialregion?.replaceAll(" ", "-");
   var city: any = document.address.city?.toLowerCase();
-  var initialrcity: any = city.toString();
-  var finalcity: any = initialrcity.replaceAll(" ", "-");
-  var string: any = name.toString();
-  let result1: any = string.replaceAll(" ", "-");
+  var initialrcity: any = city?.toString();
+  var finalcity: any = initialrcity?.replaceAll(" ", "-");
+  var string: any = name?.toString();
+  let result1: any = string?.replaceAll(" ", "-");
   if (!document.slug) {
-    var repspc=document.name.replace(/\s+/g,"-");
+    var repspc=document.name?.replace(/\s+/g,"-");
     var link =country + "/" + region + "/" + city +
     "/" +
     document.id+"-"+repspc.toLowerCase() +
