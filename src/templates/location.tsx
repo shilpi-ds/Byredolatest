@@ -146,14 +146,41 @@ export const config: TemplateConfig = {
  */
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  let url = "";
+  // let url = "";
+  // if (!document.slug) {
+  //   let slugString = document.id + " " + document.name;
+  //   let slug = slugify(slugString);
+  //   url = `${slug}.html`;
+  // } else {
+  //   url = `${document.slug.toString()}.html`;
+  // }
+  var url = "";
+   var name: any = document.name?.toLowerCase();
+ // var mainPhones: any = result.rawData.mainPhone;
+  var country: any = document.address.countryCode?.toLowerCase();
+  var region: any = document.address.region
+    ?.toLowerCase()
+    .replaceAll(" ", "-");
+  var initialregion: any = region.toString();
+  var finalregion: any = initialregion.replaceAll(" ", "-");
+  var city: any = document.address.city?.toLowerCase();
+  var initialrcity: any = city.toString();
+  var finalcity: any = initialrcity.replaceAll(" ", "-");
+  var string: any = name.toString();
+  let result1: any = string.replaceAll(" ", "-");
   if (!document.slug) {
-    let slugString = document.id + " " + document.name;
-    let slug = slugify(slugString);
-    url = `${slug}.html`;
+    var repspc=document.name.replace(/\s+/g,"-");
+    var link =country + "/" + region + "/" + city +
+    "/" +
+    document.id+"-"+repspc.toLowerCase() +
+    ".html";
   } else {
-    url = `${document.slug.toString()}.html`;
+    var link =country + "/" + region + "/" + city +
+    "/" +
+    document.slug?.toString() +
+    ".html";
   }
+  url=`/${link}`;
   return url;
 };
 
