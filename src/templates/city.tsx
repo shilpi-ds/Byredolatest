@@ -361,17 +361,25 @@ const City: Template<TemplateRenderProps> = ({
                             </Link>
                           </div>
                           <div className="ctaBtn">
-                            <Link
-                              data-ya-track="getdirections"
-                              eventName={`getdirections`}
-                              className="direction button before-icon"
-                              onClick={() => getDirectionUrl(e)}
-                              href="javascript:void(0);"
-                              rel="noopener noreferrer"
-                              //conversionDetails={conversionDetails_direction}
-                            >  
-                             DIRECTIONS
-                            </Link>
+                          <Link
+                    data-ya-track="getdirections"
+                    eventName={`getdirections`}
+                    className="direction button before-icon"
+                    onClick={() => getDirectionUrl(entity)}
+                    href="javascript:void(0);"
+                    rel="noopener noreferrer"
+                  //conversionDetails={conversionDetails_direction}
+                  >
+                    {/* {data.getDirection ? (
+                      <>
+                        {svgIcons.GetDirection}
+                        {data.getDirection}
+                      </>
+                    ) : (
+                      <>{svgIcons.GetDirection}Map & Direction</>
+                    )} */}
+                  DIRECTIONS
+                  </Link>
                           </div>
                         </div>
     </div>
