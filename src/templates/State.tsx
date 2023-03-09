@@ -249,8 +249,10 @@ const region: Template<TemplateRenderProps> = ({
   document,
 }) => {
   const {
-    name,
+   
     _site,
+   
+    name,
     slug,
     address,
    
@@ -260,10 +262,14 @@ const region: Template<TemplateRenderProps> = ({
   const childrenDivs = dm_directoryChildren ? dm_directoryChildren.map((entity: any) => {
     let detlslug;
 
-   // console.log(entity,"entity")
+   
+    entity.dm_directoryChildren.map((items:any)=>{
+      const cntry =items.address.countryCode;
+      // return items.address.countryCode;
+   
     if (typeof entity?.dm_directoryChildren != "undefined") {
-    var country: any = entity?.address?.countryCode?.toLowerCase();
-    //console.log(country,"con");
+    //var country: any = dm_directoryChildren.address?.countryCode?.toLowerCase();
+   // console.log(entity.address?.countryCode,"con");
       if (entity?.dm_directoryChildrenCount == 1) {
         entity?.dm_directoryChildren?.map((res: any) => {
          //console.log(res,"res")
@@ -274,7 +280,7 @@ const region: Template<TemplateRenderProps> = ({
           var finalregion: any = initialregion?.replaceAll(" ", "-");
           if (!res.slug) {
             let slugString = res?.id+"-"+(res?.name.replace(/\s+/g,"-")).toLowerCase();
-            let slugi = country+"/" +finalregion+"/"+ entity.slug + "/" + slugString;
+            let slugi = cntry.toLowerCase()+"/" +finalregion+"/"+ entity.slug + "/" + slugString;
             detlslug1 = `${slugi}.html`;
           } else {
             detlslug1 = `${res.slug.toString()}.html`;
@@ -284,11 +290,11 @@ const region: Template<TemplateRenderProps> = ({
 
         })
       } else {
-        detlslug = "/" + slug + "/" + entity.slug + ".html";
+        detlslug = cntry.toLowerCase()+"/"+slug+"/"+entity.slug+".html";
       }
 
     }
-
+ })
     return (
       <li className=" storelocation-category">
         <a
