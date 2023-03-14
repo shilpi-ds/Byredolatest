@@ -59,7 +59,7 @@ export const config: TemplateConfig = {
       "c_robotsTag",
     ],
     localization: {
-      locales: ["en_GB"],
+      locales: ["en_GB","fr","ja","de","it"],
       primary: false,
     },
   },
