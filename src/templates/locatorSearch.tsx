@@ -65,20 +65,39 @@ export const config: TemplateConfig = {
   },
 };
 
-var url = "";
-export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  if (!document.slug) {
-    let slugString = document.id + " " + document.name;
-    let slug = slugify(slugString);
-    url = `index.html`;
-  } else {
-    url = `${document.slug.toString()}.html`;
-  }
-  return url;
-};
+// var url = "";
+// export const getPath: GetPath<TemplateProps> = ({ document }) => {
+//   if (!document.slug) {
+//     let slugString = document.id + " " + document.name;
+//     let slug = slugify(slugString);
+//     url = `index.html`;
+//   } else {
+//     url = `${document.slug.toString()}.html`;
+//   }
+//   return url;
+// };
 // export const getPath: GetPath<TemplateProps> = () => {
 //   return `index.html`;
 // };
+
+var url = "";
+var currentUrl: any;
+export const getPath: GetPath<TemplateProps> = ({ document }) => {
+  var url = "";
+  var name: any = document.name?.toLowerCase();
+  var string: any = name?.toString();
+  let result: any = string?.replaceAll(" ", "-");
+
+  if (!document.slug) {
+    currentUrl = `index.html`;
+    url = `${document.meta.locale}/index.html`;
+  } else {
+    currentUrl = `${document.slug.toString()}.html`;
+    url = `${document.meta.locale}/${document.slug.toString()}.html`;
+  }
+
+  return url;
+};
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   relativePrefixToRoot,
