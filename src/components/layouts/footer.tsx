@@ -26,12 +26,13 @@ const Footer = (props: any) => {
     phone,
     path
   } = props;
-  var currentUrl = ""
-  const myArray = path.split("/");
-  currentUrl = myArray && myArray[2]
-  const updatelocale = (locale: any) => {
-    return (window.location.pathname = `${locale}/${currentUrl}`);
-  };
+  // var currentUrl = ""
+  // const myArray = path.split("/");
+  // console.log(myArray);
+  // currentUrl = myArray && myArray[2]
+  // const updatelocale = (locale: any) => {
+  //   return (window.location.pathname = `${locale}/${currentUrl}`);
+  // };
   return (
     <>
       <div className="subfooter-sec">
@@ -40,7 +41,7 @@ const Footer = (props: any) => {
             <div className="subfooter-links">
                
               <ul>
-                <li><LocalesDropdown updatelocale={updatelocale} /></li>
+                <li><LocalesDropdown updatelocale={path} /></li>
                 <li className="text-xl pb-4">{customerCare}</li>
 
                 <li className="icon-row location-phone ">

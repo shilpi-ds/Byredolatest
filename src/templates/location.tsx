@@ -626,7 +626,7 @@ const Location: Template<ExternalApiRenderData> = ({
             footerStoreLocator={_site.c_footerStoreLocator}
             customerCare={_site.c_customerCare}
             phone={_site.mainPhone}
-            emailAddress={_site.c_emailAddress} path={path}
+            emailAddress={_site.c_emailAddress} path={updatelocale}
           />
         </AnalyticsScopeProvider>
       </AnalyticsProvider>

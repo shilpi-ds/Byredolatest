@@ -1,4 +1,7 @@
 import * as React from "react";
+import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import "../types/i18n.tsx";
 import "../index.css";
 import {
   GetPath,
@@ -234,6 +237,16 @@ const locatorSearch: Template<TemplateRenderProps> = ({
     disableDefaultUI: true,
   };
 
+  
+  const { t, i18n } = useTranslation();
+  i18n.changeLanguage(`${document.meta.locale}`);
+  var currentUrl = ""
+  const myArray = path.split("/");
+  currentUrl = myArray && myArray[1]
+  const updatelocale = (locale: any) => {
+    return (window.location.pathname = `${locale}/${currentUrl}`);
+  };
+
   return (
     <>
       <JsonLd<locator>
@@ -279,7 +292,7 @@ const locatorSearch: Template<TemplateRenderProps> = ({
         footerStoreLocator={_site.c_footerStoreLocator}
         customerCare={_site.c_customerCare}
         phone={_site.mainPhone}
-        emailAddress={_site.c_emailAddress}
+        emailAddress={_site.c_emailAddress} path={updatelocale}
       />
       </AnalyticsScopeProvider>
       </AnalyticsProvider>
