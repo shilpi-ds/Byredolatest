@@ -541,11 +541,11 @@ const Location: Template<ExternalApiRenderData> = ({
               </p>
             </div>
           </div> */}
-          <BreadCrumbs
+          {/* <BreadCrumbs
           name={name}
           parents={dm_directoryParents}
           address={address}
-        ></BreadCrumbs>
+        ></BreadCrumbs> */}
           <div className="store-time text-5xl text-center font-semibold mb-4">
             {hours && (
               <OpenCloseStatus
