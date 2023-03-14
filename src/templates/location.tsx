@@ -8,6 +8,10 @@
  * template for every eligible entity in your Knowledge Graph.
  */
 import * as React from "react";
+import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import "../types/i18n.tsx";
+import LocalesDropdown from "../components/commons/LanguageDropdown";
 import BreadCrumbs from "../components/layouts/BreadCrumb";
 import NearByLocation from "../components/locationDetails/NearByLocation";
 import { nearByLocation } from "../types/nearByLocation";
@@ -80,18 +84,18 @@ export const config: TemplateConfig = {
       "mainPhone",
       "geomodifier",
       "yextDisplayCoordinate",
-
+      
       /*Banner*/
-      "c_bannerImage",
-      "c_bannerTitle",
-      "c_bannerDescription",
+      //"c_bannerImage",
+      //"c_bannerTitle",
+      //"c_bannerDescription",
 
       /*About Byredo*/
       "c_image",
       "c_title",
       "c_readMore",
       "description",
-
+      "c_aboutImages",
       /*PhotoGallery*/
       "c_photoGalleryTitle",
       "photoGallery",
@@ -132,7 +136,7 @@ export const config: TemplateConfig = {
 
     // The entity language profiles that documents will be generated for.
     localization: {
-      locales: [AnswerExperienceConfig.locale],
+      locales: ["fr","en_GB","ja","de","it"],
       primary: false,
     },
   },
@@ -382,6 +386,7 @@ const Location: Template<ExternalApiRenderData> = ({
     yextDisplayCoordinate,
     timezone,
     c_relatedFaqs,
+    c_aboutImages,
     c_faqsTitle,
     c_title,
     description,
@@ -392,9 +397,9 @@ const Location: Template<ExternalApiRenderData> = ({
     photoGallery,
     geomodifier,
     c_faqsDescription,
-    c_bannerImage,
-    c_bannerTitle,
-    c_bannerDescription,
+    //c_bannerImage,
+   // c_bannerTitle,
+   // c_bannerDescription,
     geocodedCoordinate,
 
     dm_directoryParents,
@@ -447,7 +452,12 @@ const Location: Template<ExternalApiRenderData> = ({
   // } else {
   //   url = `${document.slug.toString()}.html`;
   // }
-
+  var currentUrl = ""
+  const myArray = path.split("/");
+  currentUrl = myArray && myArray[2]
+  const updatelocale = (locale: any) => {
+    return (window.location.pathname = `${locale}/${currentUrl}`);
+  };
   return (
     <>
       <JsonLd<Location>
@@ -523,6 +533,7 @@ const Location: Template<ExternalApiRenderData> = ({
         enableTrackingCookie={AnalyticsEnableTrackingCookie}
       >
         <AnalyticsScopeProvider name={""}>
+       
           <Header
             ByredoLogo={_site.c_byradoLogo}
             ByredoLinks={_site.c_headerMenus}
@@ -530,7 +541,7 @@ const Location: Template<ExternalApiRenderData> = ({
           
     
 
-          <div className="hero mx-auto">
+          {/* <div className="hero mx-auto">
             <img
               className="heroBanner"
               src={
@@ -548,7 +559,7 @@ const Location: Template<ExternalApiRenderData> = ({
                   : "Makeup Beauty Products Website"}
               </p>
             </div>
-          </div>
+          </div> */}
           <BreadCrumbs
           name={name}
           parents={dm_directoryParents}
@@ -576,7 +587,7 @@ const Location: Template<ExternalApiRenderData> = ({
             {c_title && (
               <About
                 storeDescriptionTitle={c_title}
-                storeDescriptionImage={c_image}
+                storeDescriptionImage={c_aboutImages}
                 storeDescriptionText={description}
                 storeDescriptionCTA={c_readMore}
               />
@@ -615,7 +626,7 @@ const Location: Template<ExternalApiRenderData> = ({
             footerStoreLocator={_site.c_footerStoreLocator}
             customerCare={_site.c_customerCare}
             phone={_site.mainPhone}
-            emailAddress={_site.c_emailAddress}
+            emailAddress={_site.c_emailAddress} path={path}
           />
         </AnalyticsScopeProvider>
       </AnalyticsProvider>

@@ -17,6 +17,16 @@ const About = (props: AboutSection) => {
   if (storeDescriptionText) {
     var Desc = RtfConverter.toHTML(storeDescriptionText);
   }
+  let imageurl =storeDescriptionImage ? storeDescriptionImage.map((element: any) => {
+    return (
+      <>
+      <div className="aboutimages"><img src={element.url} height="200px" width="200px"/></div>
+      
+      </>
+      );  
+  }) : null;
+
+  //console.log(imageurl);
   return (
     <>
       {storeDescriptionTitle && (
@@ -28,11 +38,13 @@ const About = (props: AboutSection) => {
             <div className="flex flex-wrap">
               {storeDescriptionImage && (
                 <div className="w-full lg:w-1/2 xl:w-[43%] h-[268px] md:h-[340px] lg:h-[416px] one">
-                  <img
+{imageurl}
+                  
+                  {/* <img
                     className="max-w-full rounded-xl w-full h-full"
                     alt=""
                     src={storeDescriptionImage.url}
-                  ></img>
+                  ></img> */}
                 </div>
               )}
 

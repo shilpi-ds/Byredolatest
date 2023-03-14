@@ -1,6 +1,7 @@
 import * as React from "react";
 import CookieConsent, { Cookies } from "react-cookie-consent";
 import { cookieText, cookieText1, cookieUrl } from "../../config/globalConfig";
+import LocalesDropdown from "../../components/commons/LanguageDropdown";
 import { Link } from "@yext/pages/components";
 import { svgIcons } from "../../svg icons/svgIcon";
 
@@ -10,6 +11,7 @@ type props = {
   footerStoreLocator: any;
   customerCare: any;
   emailAddress: any;
+  path:any;
 };
 const Footer = (props: any) => {
   const {
@@ -22,15 +24,23 @@ const Footer = (props: any) => {
     footerStoreLocator,
     customerCare,
     phone,
+    path
   } = props;
-
+  var currentUrl = ""
+  const myArray = path.split("/");
+  currentUrl = myArray && myArray[2]
+  const updatelocale = (locale: any) => {
+    return (window.location.pathname = `${locale}/${currentUrl}`);
+  };
   return (
     <>
       <div className="subfooter-sec">
         <div className="container-lg">
           <div className="subfooter-inner">
             <div className="subfooter-links">
+               
               <ul>
+                <li><LocalesDropdown updatelocale={updatelocale} /></li>
                 <li className="text-xl pb-4">{customerCare}</li>
 
                 <li className="icon-row location-phone ">
