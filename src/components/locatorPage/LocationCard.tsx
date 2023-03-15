@@ -87,12 +87,14 @@ const LocationCard: CardComponent<Location> = ({ result }) => {
    */
   var url = "";
   if (!result.rawData.slug) {
-    let slugString = result.rawData?.id + " " + result.rawData?.name;
+    let slugString = result.rawData?.id + "-" + result.rawData?.name;
     let slug = slugify(slugString);
-    url = `${slug}.html`;
+    url = `${slugString}.html`;
   } else {
     url = `${result.rawData.slug.toString()}.html`;
   }
+
+  
 
   /**
    * LocationCard component which returns the HTML of Locator Page Listing.

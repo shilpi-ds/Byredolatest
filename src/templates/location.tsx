@@ -153,8 +153,8 @@ var url = ""; /** current detail page url */
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
   if (!document.slug) {
-    let slugString = document.id + " " + document.name;
-    //slugString = slugify(slugString);
+    let slugString = document.id + "-" + document.name;
+    slugString = slugify(slugString);
     url = `${document.meta.locale}/${slugString}.html`;
   } else {
     url = `${document.meta.locale}/${document.slug.toString()}.html`;
@@ -534,11 +534,11 @@ const Location: Template<ExternalApiRenderData> = ({
               </p>
             </div>
           </div> */}
-          {/* <BreadCrumbs
+          <BreadCrumbs
           name={name}
           parents={dm_directoryParents}
           address={address}
-        ></BreadCrumbs> */}
+        ></BreadCrumbs>
           <div className="store-time text-5xl text-center font-semibold mb-4">
             {hours && (
               <OpenCloseStatus
