@@ -29,7 +29,7 @@ export const config: TemplateConfig = {
       "name" 
     ],
     localization: {
-      locales: ["en_GB","fr","de","ja","it"],
+      locales: ["en_GB"],
       primary: false
     },
   },

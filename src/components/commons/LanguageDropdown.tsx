@@ -12,11 +12,11 @@ function LocalesDropdown(props: any) {
       <form>
         <select onChange={onColorChange} value={color}>
           <option>{t("select_language")}</option>
-          <option value="en-GB">{t("english")}</option>
-          <option value="fr">{t("french")}</option>
-          <option value="it">{t("italian")}</option>
-          <option value="ja">{t("japanese")}</option>
-          <option value="de">{t("german")}</option>
+          <option value="en-GB">{t("English")}</option>
+          <option value="fr-FR">{t("French")}</option>
+          <option value="it-IT">{t("Italian")}</option>
+          <option value="ja-JP">{t("Japanese")}</option>
+          <option value="de-DE">{t("German")}</option>
         </select>
       </form>
     </div>

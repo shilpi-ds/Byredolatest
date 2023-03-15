@@ -136,7 +136,7 @@ export const config: TemplateConfig = {
 
     // The entity language profiles that documents will be generated for.
     localization: {
-      locales: ["fr","en_GB","ja","de","it"],
+      locales: ["fr-FR","en_GB","it-IT","ja-JP","de-DE"],
       primary: false,
     },
   },
@@ -152,21 +152,14 @@ export const config: TemplateConfig = {
 var url = ""; /** current detail page url */
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  var url = "";
-  var name: any = document.name?.toLowerCase();
-  var string: any = name?.toString();;
-  let result: any = string?.replaceAll(" ", "-");
   if (!document.slug) {
-    url += `${document.id}-${result}`;
-    url = slugify(url)
+    let slugString = document.id + " " + document.name;
+    slugString = slugify(slugString);
+    url = `${document.meta.locale}/${slugString}.html`;
   } else {
-    url += `${document.slug.toString()}`;
-
-    url = slugify(url)
-
+    url = `${document.meta.locale}/${document.slug.toString()}.html`;
   }
-
-  return "/" + document.meta.locale + "/" + url + ".html"
+  return url;
 };
 
 /**
@@ -175,9 +168,9 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
  * NOTE: This currently has no impact on the local dev path. Redirects will be setup on
  * a new deploy.
  */
-export const getRedirects: GetRedirects<TemplateProps> = ({ document }) => {
-  return [`index-old/${document.id.toString()}`];
-};
+// export const getRedirects: GetRedirects<TemplateProps> = ({ document }) => {
+//   return [`index-old/${document.id.toString()}`];
+// };
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,

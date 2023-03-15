@@ -59,7 +59,7 @@ export const config: TemplateConfig = {
       "c_robotsTag",
     ],
     localization: {
-      locales: ["en_GB","fr","ja","de","it"],
+      locales: ["en_GB","fr-FR","it-IT","ja-JP","de-DE"],
       primary: false,
     },
   },
@@ -91,7 +91,7 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
   if (!document.slug) {
     currentUrl = `index.html`;
     url = `${document.meta.locale}/index.html`;
-    console.log(url,"sdbhsbf");
+    console.log(url);
   } else {
     currentUrl = `${document.slug.toString()}.html`;
     url = `${document.meta.locale}/${document.slug.toString()}.html`;
