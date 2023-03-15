@@ -380,7 +380,7 @@ const Location: Template<ExternalApiRenderData> = ({
     dm_directoryChildren
   } = document;
   let templateData = { document: document, __meta: __meta };
-
+  const { t, i18n } = useTranslation();
   let hoursSchema = [];
   let breadcrumbScheme = [];
   for (var key in hours) {

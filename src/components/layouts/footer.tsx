@@ -4,6 +4,7 @@ import { cookieText, cookieText1, cookieUrl } from "../../config/globalConfig";
 import LocalesDropdown from "../../components/commons/LanguageDropdown";
 import { Link } from "@yext/pages/components";
 import { svgIcons } from "../../svg icons/svgIcon";
+import { useTranslation } from "react-i18next";
 
 type props = {
   footerHelpSection: any;
@@ -26,6 +27,7 @@ const Footer = (props: any) => {
     phone,
     path
   } = props;
+  const { t, i18n } = useTranslation();
 
   return (
     <>
@@ -132,3 +134,5 @@ const Footer = (props: any) => {
   );
 };
 export default Footer;
+
+
