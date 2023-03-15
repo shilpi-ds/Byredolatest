@@ -26,13 +26,7 @@ const Footer = (props: any) => {
     phone,
     path
   } = props;
-  var currentUrl = ""
-  const myArray = path.split("/");
-  console.log(myArray);
-  currentUrl = myArray && myArray[2]
-  const updatelocale = (locale: any) => {
-    return (window.location.pathname = `${locale}/${currentUrl}`);
-  };
+
   return (
     <>
       <div className="subfooter-sec">
