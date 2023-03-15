@@ -154,7 +154,7 @@ var url = ""; /** current detail page url */
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
   if (!document.slug) {
     let slugString = document.id + " " + document.name;
-    slugString = slugify(slugString);
+    //slugString = slugify(slugString);
     url = `${document.meta.locale}/${slugString}.html`;
   } else {
     url = `${document.meta.locale}/${document.slug.toString()}.html`;

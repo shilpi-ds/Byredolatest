@@ -91,7 +91,7 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
   if (!document.slug) {
     currentUrl = `index.html`;
     url = `${document.meta.locale}/index.html`;
-    console.log(url);
+    //console.log(url);
   } else {
     currentUrl = `${document.slug.toString()}.html`;
     url = `${document.meta.locale}/${document.slug.toString()}.html`;
