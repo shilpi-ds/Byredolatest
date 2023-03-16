@@ -31,6 +31,7 @@ const useUpdateTranslation = (data:any, locale:any) => {
     i18n.addResource(locale, 'translation', 'closesAt', data.c_closesAt);
     i18n.addResource(locale, 'translation', 'close', data.c_close);
     i18n.addResource(locale, 'translation', 'open', data.c_open);
+    i18n.addResource(locale, 'translation', 'store_hours', data.c_storeHours);
    // i18n.addResource(locale, 'translation', 'Open_Closed_at', data.c_open);
     //i18n.addResource(locale, 'translation', 'Closed_Open_at', data.c_open);
     i18n.addResource(locale, 'translation', 'miles', data.c_miles);

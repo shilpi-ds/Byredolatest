@@ -1,4 +1,7 @@
 import * as React from "react";
+import "../../types/i18n";
+import { useTranslation } from 'react-i18next';
+import useUpdateTranslation from "../../hooks/useUpdateTranslation";
 const openClose = {
   formatOpenNowString: (hoursData: any, timeZone: any) => {
     var Day = 0;
@@ -178,8 +181,8 @@ const openClose = {
       "Friday",
       "Saturday",
     ];
-
-    let hoursString = "Closed";
+    const { t, i18n } = useTranslation();
+    let hoursString = `${t("closed")}`;
     if (openRightNow) {
       if (
         currentInterval.start === "00:00" &&
@@ -187,15 +190,15 @@ const openClose = {
       ) {
         hoursString = "Open 24 Hours";
       } else {
-        hoursString = "Open - Closes at [closingTime]";
+        hoursString = `${t("Open - Closed at")} [closingTime]`;
         hoursString = hoursString.replace("[closingTime]", currentInterval.end);
       }
     } else if (nextInterval) {
       if (nextIsTomorrow) {
-        hoursString = `Closed - Opens at [openingTime] ${week[Day]} `;
+        hoursString = `${t("Closed - Open at")} [openingTime] ${week[Day]} `;
         hoursString = hoursString.replace("[openingTime]", nextInterval.start);
       } else {
-        hoursString = "Closed - Opens at [openingTime]";
+        hoursString = `${t("Closed - Open at")} [openingTime]`;
         hoursString = hoursString.replace("[openingTime]", nextInterval.start);
       }
     }
@@ -308,16 +311,17 @@ const openClose = {
 };
 
 export default function OpenCloseStatus(props: any) {
+  const { t } = useTranslation();
   return (
     <div className="">
       {props?.hours && props?.hours?.reopenDate ? (
-        <p className="">Temporarily Closed</p>
+        <p className="">{t("temporarily_closed")}</p>
       ) : props?.hours ? (
         <p className="closeing-div onhighLight">
           {openClose.formatOpenNowString(props.hours, props.timezone)}
         </p>
       ) : (
-        <p className="closed">Closed</p>
+        <p className="closed">{t("closed")}</p>
       )}
     </div>
   );

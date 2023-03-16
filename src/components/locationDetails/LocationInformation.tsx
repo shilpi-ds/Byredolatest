@@ -20,11 +20,11 @@ type props = {
   timezone: any;
   hours: any;
   additionalHoursText: any;
-  
+  site:any;
 };
 const LocationInformation = (data: props) => {
   const [modalIsOpen, setIsOpen] = useState(false);
-
+//console.log(data,"data");
   let subtitle: any;
   const customStyles = {
     content: {
@@ -114,7 +114,7 @@ const LocationInformation = (data: props) => {
             <div className="box store-info">
               <div className="inner-box">
                 <h4 className="box-title">
-                  Store Information
+                 {data.site.c_storeInformation} 
                 </h4>
                 <Address address={data.address}></Address>
                 <Phone phone={data.phone} />
@@ -153,7 +153,8 @@ const LocationInformation = (data: props) => {
                     ) : (
                       <>{svgIcons.GetDirection}Map & Direction</>
                     )} */}
-                    {svgIcons.GetDirection} DIRECTIONS
+                    {/* {svgIcons.GetDirection} DIRECTIONS */}
+                    {data.site.c_getDirections}
                   </Link>
                 </div>
               </div>
@@ -169,7 +170,7 @@ const LocationInformation = (data: props) => {
                             {/* {data?.hoursHeading
                               ? data?.hoursHeading
                               : "Opening Hours"} */}
-                              Store Hours
+                              {data.site.c_storeHours}
                           </h4>
                           <div className="daylist">
                             <Hours
@@ -183,7 +184,7 @@ const LocationInformation = (data: props) => {
                                   className="current-location pharmacy-serv-head hide-mob link-line-text"
                                   onClick={openModal}
                                 >
-                                  Holiday Hours
+                                  {data.site.c_holidayHours}
                                 </button>
                               </>
                             )}
@@ -216,12 +217,12 @@ const LocationInformation = (data: props) => {
                                 </svg>
                               </a>
                               <h3 className="holiday-title">
-                                Holiday Hours Calendar
+                                {data.site.c_holidayHoursCalendar}
                               </h3>
                               <div className="pop-up-holyhrs heading">
-                                <div>Date</div>
-                                <div>Day</div>
-                                <div>Opening Hours</div>
+                                <div>{data.site.c_date}</div>
+                                <div>{data.site.c_day}</div>
+                                <div>{data.site.c_openingHours}</div>
                               </div>
                               <Holidayhour hours={data.hours.holidayHours} />
                             </Modal>

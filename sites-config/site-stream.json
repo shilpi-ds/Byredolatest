@@ -41,6 +41,7 @@
     "c_theStoreWillReopenAt",
     "c_temporarilyClosed",
     "c_miles",
+    "c_storeHours",
     "c_selectLanguage"
   ],
   "localization": {

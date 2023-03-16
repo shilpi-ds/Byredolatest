@@ -30,8 +30,10 @@ type props = {
   coords: any;
   slug: any;
   timezone: any;
+  site:any;
   
 };
+
 const NearByLocation = (result: props) => {
   const [timezone, setTimeZone] = React.useState("");
   let subtitle: any; 
@@ -43,7 +45,7 @@ const NearByLocation = (result: props) => {
       setTimeStatus("");
     }
   };
-
+//console.log(result,"site");
   const [data, setData] = useState([]);
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
   useEffect(() => {
@@ -76,7 +78,7 @@ const NearByLocation = (result: props) => {
               {/* {result.nearByWellPharmaciesTitle
                 ? result.nearByWellPharmaciesTitle
                 : "Nearby Well Pharmacies"} */}
-                 {t("nearby_Locations_Heading")}
+                 {result.site.c_nearbyLocationsHeading}
             </h2>
           </div>
           <Splide
@@ -204,7 +206,7 @@ const NearByLocation = (result: props) => {
                             <Link href={`${url}`}>{e.name}</Link>
                           </h3>
                           <p className="miles">
-                            {metersToMiles(e.distance ?? 0)} {t("miles")}
+                            {metersToMiles(e.distance ?? 0)} {result.site.c_miles}
                           </p>
                         </div>
 
@@ -259,7 +261,7 @@ const NearByLocation = (result: props) => {
                               className="button before-icon"
                               href={`${url}`}
                             >
-                              VIEW DETAILS
+                              {result.site.c_viewStationDetails}
                             </Link>
                           </div>
                           <div className="ctaBtn">
@@ -272,7 +274,7 @@ const NearByLocation = (result: props) => {
                               rel="noopener noreferrer"
                               //conversionDetails={conversionDetails_direction}
                             >  
-                             DIRECTIONS
+                           {result.site.c_getDirections}
                             </Link>
                           </div>
                         </div>

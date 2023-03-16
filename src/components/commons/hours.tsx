@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
-
+import "../../types/i18n";
+import { useTranslation } from "react-i18next";
 
 
 type Hours = {
@@ -183,6 +184,7 @@ type DayRow = {
 
 const DayRow = (props: DayRow) => {
   const { dayName, day, isToday, dayDate, holidayhours } = props;
+  //console.log(dayName,"day")
   const [myDataAccordintToMe, setMyDataAccordintToMe] = React.useState({});
   let a, s, holidayDate: any;
   function join(t: any, a: any, s: any) {
@@ -234,20 +236,21 @@ const DayRow = (props: DayRow) => {
       holidayopenintervals.push(myDataAccordintToMe[key]);
     }
   }
+  const { t, i18n } = useTranslation();
   return (
     <tr className={isToday ? "currentDay" : ""}>
       {Status ? (
         <td className="capitalize text-left pl-1 pr-4 dayName">
           <span>
             <b className="checked"></b>
-            {dayName} <b className="block text-sm font-normal">(Holiday)</b>
+            {t(dayName)} <b className="block text-sm font-normal">(Holiday)</b>
           </span>
         </td>
       ) : (
         <td className="capitalize text-left pl-1 pr-4 dayName">
           <span>
             <b className="checked"></b>
-            {dayName}
+            {t(dayName)} 
           </span>
         </td>
       )}

@@ -136,7 +136,7 @@ export const config: TemplateConfig = {
 
     // The entity language profiles that documents will be generated for.
     localization: {
-      locales: ["fr-FR","en_GB","it-IT","ja-JP","de-DE"],
+      locales: ["fr_FR","en_GB","it_IT","ja_JP","de_DE"],
       primary: false,
     },
   },
@@ -544,7 +544,7 @@ const Location: Template<ExternalApiRenderData> = ({
             {hours && (
               <OpenCloseStatus
                 timezone={timezone ? timezone : defaultTimeZone}
-                hours={hours ? hours : ""}
+                hours={hours ? hours : ""} site={_site}
               ></OpenCloseStatus>
             )}
           </div>
@@ -556,6 +556,7 @@ const Location: Template<ExternalApiRenderData> = ({
             timezone={timezone}
             hours={hours}
             additionalHoursText={additionalHoursText}
+            site={_site}
           />
 
           <div className="mt-8 md:mt-10">
@@ -588,11 +589,13 @@ const Location: Template<ExternalApiRenderData> = ({
             coords={yextDisplayCoordinate}
             slug={slug}
             timezone={timezone}
+            site={_site}
           />
 
           <div className="find-more more-location">
             <Link className="button" href="/index.html">
-              View More Locations 
+              
+              {_site.c_viewMoreLocations}
               {/* {svgIcons.ViewMoreLocation} */}
             </Link>
           </div>

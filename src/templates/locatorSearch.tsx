@@ -297,7 +297,7 @@ const locatorSearch: Template<TemplateRenderProps> = ({
       <LocatorBread />
       <SearchHeadlessProvider
         experienceKey={AnswerExperienceConfig.experienceKey}
-        locale={AnswerExperienceConfig.locale}
+        locale={document.meta.locale}
         apiKey={AnswerExperienceConfig.apiKey}
         verticalKey={AnswerExperienceConfig.verticalKey}
         experienceVersion={AnswerExperienceConfig.experienceVersion}
