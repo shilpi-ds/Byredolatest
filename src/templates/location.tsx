@@ -95,7 +95,7 @@ export const config: TemplateConfig = {
       "c_title",
       "c_readMore",
       "description",
-      "c_aboutImages",
+      //"c_aboutImages",
       /*PhotoGallery*/
       "c_photoGalleryTitle",
       "photoGallery",
@@ -360,7 +360,7 @@ const Location: Template<ExternalApiRenderData> = ({
     yextDisplayCoordinate,
     timezone,
     c_relatedFaqs,
-    c_aboutImages,
+    //c_aboutImages,
     c_faqsTitle,
     c_title,
     description,
@@ -562,7 +562,7 @@ const Location: Template<ExternalApiRenderData> = ({
             {c_title && (
               <About
                 storeDescriptionTitle={c_title}
-                storeDescriptionImage={c_aboutImages}
+                storeDescriptionImage={c_image}
                 storeDescriptionText={description}
                 storeDescriptionCTA={c_readMore}
               />
@@ -575,11 +575,11 @@ const Location: Template<ExternalApiRenderData> = ({
           />
           )}
 
-          {c_faqsTitle && c_relatedFaqs && (
+          {/* {c_faqsTitle && c_relatedFaqs && (
             <div className="mt-5 md:mt-10">
               <Faq prop={c_relatedFaqs} faq_title={c_faqsTitle} />
             </div>
-          )}
+          )} */}
 
           <NearByLocation
             prop={externalApiData}
@@ -592,7 +592,8 @@ const Location: Template<ExternalApiRenderData> = ({
 
           <div className="find-more more-location">
             <Link className="button" href="/index.html">
-              View More Locations {svgIcons.ViewMoreLocation}
+              View More Locations 
+              {/* {svgIcons.ViewMoreLocation} */}
             </Link>
           </div>
           <Footer
@@ -602,6 +603,8 @@ const Location: Template<ExternalApiRenderData> = ({
             customerCare={_site.c_customerCare}
             phone={_site.mainPhone}
             emailAddress={_site.c_emailAddress} path={updatelocale}
+            _site={_site}
+            meta={__meta}
           />
         </AnalyticsScopeProvider>
       </AnalyticsProvider>

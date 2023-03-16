@@ -5,6 +5,7 @@ import LocalesDropdown from "../../components/commons/LanguageDropdown";
 import { Link } from "@yext/pages/components";
 import { svgIcons } from "../../svg icons/svgIcon";
 import { useTranslation } from "react-i18next";
+import useUpdateTranslation from "../../hooks/useUpdateTranslation";
 
 type props = {
   footerHelpSection: any;
@@ -13,6 +14,8 @@ type props = {
   customerCare: any;
   emailAddress: any;
   path:any;
+  _site:any;
+  meta:any;
 };
 const Footer = (props: any) => {
   const {
@@ -25,9 +28,12 @@ const Footer = (props: any) => {
     footerStoreLocator,
     customerCare,
     phone,
-    path
+    path,_site,meta
   } = props;
+
   const { t, i18n } = useTranslation();
+  //i18n.changeLanguage(meta.locale);
+  //useUpdateTranslation(_site, meta.locale);
 
   return (
     <>

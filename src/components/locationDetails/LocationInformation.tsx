@@ -124,7 +124,7 @@ const LocationInformation = (data: props) => {
                     {Object.keys(data.hours).length > 0 && (
                       <>
                         <div className="icon-row single-line">
-                          <div className="icon">{svgIcons.openclosestatus}</div>
+                          {/* <div className="icon">{svgIcons.openclosestatus}</div> */}
                           <OpenCloseStatus
                             timezone={timezone ? timezone : defaultTimeZone}
                             hours={data.hours}

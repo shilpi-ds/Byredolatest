@@ -9,7 +9,7 @@ const Phone = (props: any) => {
     <>
       {phone && (
         <div className="icon-row location-phone ">
-          <span className="onhighLight icon">{svgIcons.phone}</span>
+          {/* <span className="onhighLight icon">{svgIcons.phone}</span> */}
           <Link
             className="phone-number onhighLight"
             data-ya-track="phone"

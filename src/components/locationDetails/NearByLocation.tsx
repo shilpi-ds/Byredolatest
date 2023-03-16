@@ -9,6 +9,9 @@ import { Link } from "@yext/pages/components";
 import Address from "../commons/Address";
 import Phone from "../commons/phone";
 import OpenCloseStatus from "../commons/OpenCloseStatus";
+import { useTranslation } from 'react-i18next';
+import "../../types/i18n";
+import useUpdateTranslation from "../../hooks/useUpdateTranslation";
 import {slugify, defaultTimeZone } from "../../config/globalConfig";
 import {
   formatPhoneNumber,
@@ -63,6 +66,7 @@ const NearByLocation = (result: props) => {
 
     setData(arr);
   }, [setData]);
+  const { t } = useTranslation();
   return (
     <>
       <div className="nearby-sec">
@@ -72,7 +76,7 @@ const NearByLocation = (result: props) => {
               {/* {result.nearByWellPharmaciesTitle
                 ? result.nearByWellPharmaciesTitle
                 : "Nearby Well Pharmacies"} */}
-                NearBy Location
+                 {t("nearby_Locations_Heading")}
             </h2>
           </div>
           <Splide
@@ -200,7 +204,7 @@ const NearByLocation = (result: props) => {
                             <Link href={`${url}`}>{e.name}</Link>
                           </h3>
                           <p className="miles">
-                            {metersToMiles(e.distance ?? 0)} miles
+                            {metersToMiles(e.distance ?? 0)} {t("miles")}
                           </p>
                         </div>
 
@@ -208,7 +212,7 @@ const NearByLocation = (result: props) => {
                         {e.mainPhone ? (
                           <>
                             <div className="icon-row location-phone ">
-                              <span className="icon">{svgIcons.phone}</span>
+                              {/* <span className="icon">{svgIcons.phone}</span> */}
                               <Link
                                 className="phone-number onhighLight"
                                 data-ya-track="phone"
@@ -229,9 +233,9 @@ const NearByLocation = (result: props) => {
                             {Object.keys(e.hours).length > 0 ? (
                               <>
                                 <div className="OpenCloseStatus icon-row">
-                                  <div className="icon">
+                                  {/* <div className="icon">
                                     {svgIcons.openclosestatus}
-                                  </div>
+                                  </div> */}
                                   <OpenCloseStatus
                                     timezone={
                                       timezone ? timezone : defaultTimeZone

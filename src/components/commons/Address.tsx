@@ -10,7 +10,7 @@ const Address = (props: any) => {
   const { address } = props;
   return (
     <h4 className="icon-row location-address">
-      <span className="icon">{svgIcons.address}</span>
+      {/* <span className="icon">{svgIcons.address}</span> */}
       <span className="">{address?.line1}</span> <br />
       {address?.line2 && (
         <span className="">
