@@ -136,7 +136,7 @@ export const config: TemplateConfig = {
 
     // The entity language profiles that documents will be generated for.
     localization: {
-      locales: ["fr_FR","en_GB","it_IT","ja_JP","de_DE"],
+      locales: ["fr-FR","en_GB","it-IT","ja-JP","de-DE"],
       primary: false,
     },
   },
