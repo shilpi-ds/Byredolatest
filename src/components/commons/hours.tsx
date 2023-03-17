@@ -265,7 +265,7 @@ const DayRow = (props: DayRow) => {
                     <>
                       {openint.isClosed ? (
                         <div className="pr-1">
-                          <span className="time-hours">Closed</span>
+                          <span className="time-hours">{t("closed")}</span>
                         </div>
                       ) : (
                         openint?.openIntervals &&
@@ -318,7 +318,7 @@ const DayRow = (props: DayRow) => {
    </span>
  </td> :
        <td className="pr-1">
-          <span className="time-hours">Closed</span>
+          <span className="time-hours">{t("closed")}</span>
         </td>
       )}
     </tr>
