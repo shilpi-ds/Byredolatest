@@ -1,9 +1,9 @@
-import * as React from "react";
-import { useEffect, useRef, useState } from "react";
-import "../../types/i18n";
+import { withTranslation } from "react-i18next";
 import { useTranslation } from "react-i18next";
+import "../../types/i18n.tsx";
+import * as React from "react";
 
-
+import { useEffect, useRef, useState } from "react";
 type Hours = {
   title?: string;
   hours: Hours;
@@ -184,7 +184,6 @@ type DayRow = {
 
 const DayRow = (props: DayRow) => {
   const { dayName, day, isToday, dayDate, holidayhours } = props;
-  //console.log(dayName,"day")
   const [myDataAccordintToMe, setMyDataAccordintToMe] = React.useState({});
   let a, s, holidayDate: any;
   function join(t: any, a: any, s: any) {
@@ -250,7 +249,7 @@ const DayRow = (props: DayRow) => {
         <td className="capitalize text-left pl-1 pr-4 dayName">
           <span>
             <b className="checked"></b>
-            {t(dayName)} 
+            {t(dayName)}
           </span>
         </td>
       )}

@@ -10,7 +10,7 @@ import {
   formatPhoneNumber,
   formatPhoneNumberIntl,
 } from "react-phone-number-input";
-import OpenCloseStatus from "..//../components/commons/OpenCloseStatus";
+import OpenCloseStatus from "../../components/commons/OpenCloseStatus";
 import Phone from "../commons/phone";
 import { svgIcons } from "../../svg icons/svgIcon";
 import { Data } from "@react-google-maps/api";

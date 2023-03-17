@@ -8,7 +8,7 @@ const resources = {
   en_GB: {
     translation: {
 
-      monday: "MonDay",
+      monday: "monday",
       tuesday: "tuesday",
       wednesday: "wednesday",
       thursday: "thursday",
@@ -19,8 +19,9 @@ const resources = {
       "Closed - Open at" :"Closed - Open at",
     },
   },
-   ja_JP: {
+   ja: {
     translation: {
+
       monday: "getsuyobi",
       tuesday: "kayobi",
       wednesday: "suiyobi",
@@ -32,7 +33,7 @@ const resources = {
       "Closed - Open at" :"teikyuubi - kaiten jikoku",
     },
   },
-  de_DE: {
+  de: {
     translation: {
 
       monday: "Montag",
@@ -46,7 +47,7 @@ const resources = {
       "Closed - Open at" :"Geschlossen - Geöffnet um",
     },
   },
-  it_IT: {
+  it: {
     translation: {
 
       monday: "Lunedì",
@@ -60,9 +61,8 @@ const resources = {
       "Closed - Open at" :"Chiuso - Aperto alle",
     },
   },
-  fr_FR: {
-    translation: {
-    
+  fr: {
+    translation: { 
       monday: "Lundi",
       tuesday: "mardi",
       wednesday: "mercredi",
@@ -72,6 +72,7 @@ const resources = {
       sunday: "dimanche",
       "Open - Closed at":"Ouvert - Fermé à",
       "Closed - Open at" :"Fermé - Ouvert à",
+      "View Details": "Voir les détails",
     },
   },
 };
@@ -80,9 +81,10 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
-      lng: "en_GB", // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
+    lng: "en_GB", // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
     // you can use the i18n.changeLanguage function to change the language manually: https://www.i18next.com/overview/api#changelanguage
     // if you're using a language detector, do not define the lng option
+
     interpolation: {
       escapeValue: false, // react already safes from xss
     },

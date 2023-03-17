@@ -429,7 +429,7 @@ const Location: Template<ExternalApiRenderData> = ({
   var currentUrl = ""
   const myArray = path.split("/");
   currentUrl = myArray && myArray[1]
-  console.log(currentUrl,"CURRENT")
+  //console.log(currentUrl,"CURRENT")
   const updatelocale = (locale: any) => {
     return (window.location.pathname = `${locale}/${currentUrl}`);
   };
