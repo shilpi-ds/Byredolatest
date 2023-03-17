@@ -107,37 +107,47 @@ const NearByLocation = (result: props) => {
             }}
           >
             {data &&
-              data.map((e: any, index: any) => {
-                if (index > 0) {
-                  let url = "";
-            var name: any = e.name?.toLowerCase();
-  var mainPhone: any = e.mainPhone;
-  var country: any = e.address.countryCode?.toLowerCase();
-  var region: any = e.address.region
-    ?.toLowerCase()
-    .replaceAll(" ", "-");
-  var initialregion: any = region.toString();
-  var finalregion: any = initialregion.replaceAll(" ", "-");
-  var city: any = e.address.city?.toLowerCase();
-  var initialrcity: any = city.toString();
-  var finalcity: any = initialrcity.replaceAll(" ", "-");
-  var string: any = name.toString();
-  let result1: any = string.replaceAll(" ", "-");
-  if (!e.slug) {
-    var repspc=e.name.replace(/\s+/g,"-");
-    var link =country + "/" + region + "/" + city +
-    "/" +
-    e.id+"-"+repspc.toLowerCase() +
-    ".html";
-  } else {
-    var link =country + "/" + region + "/" + city +
-    "/" +
-    e.slug?.toString() +
-    ".html";
-  }
-  url=`/${link}`;
+  //             data.map((e: any, index: any) => {
+  //               if (index > 0) {
+  //                 let url = "";
+  //           var name: any = e.name?.toLowerCase();
+  // var mainPhone: any = e.mainPhone;
+  // var country: any = e.address.countryCode?.toLowerCase();
+  // var region: any = e.address.region
+  //   ?.toLowerCase()
+  //   .replaceAll(" ", "-");
+  // var initialregion: any = region.toString();
+  // var finalregion: any = initialregion.replaceAll(" ", "-");
+  // var city: any = e.address.city?.toLowerCase();
+  // var initialrcity: any = city.toString();
+  // var finalcity: any = initialrcity.replaceAll(" ", "-");
+  // var string: any = name.toString();
+  // let result1: any = string.replaceAll(" ", "-");
+  // if (!e.slug) {
+  //   var repspc=e.name.replace(/\s+/g,"-");
+  //   var link =country + "/" + region + "/" + city +
+  //   "/" +
+  //   e.id+"-"+repspc.toLowerCase() +
+  //   ".html";
+  // } else {
+  //   var link =country + "/" + region + "/" + city +
+  //   "/" +
+  //   e.slug?.toString() +
+  //   ".html";
+  // }
+  // url=`/${link}`;
 
-
+  data.map((e: any, index: any) => {
+    if (index > 0) {
+      var url = "";
+      if (!e.slug) {
+        let slugString = e?.id + " " + e?.name;
+        let slug = slugify(slugString);
+        url = `${slug}.html`;
+      } else {
+        url = `${e.slug.toString()}.html`;
+      }
+      //console.log(url,"url");
 
 
 
