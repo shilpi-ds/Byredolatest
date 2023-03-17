@@ -8,7 +8,7 @@ const resources = {
   en_GB: {
     translation: {
 
-      monday: "monday",
+      monday: "monDay",
       tuesday: "tuesday",
       wednesday: "wednesday",
       thursday: "thursday",

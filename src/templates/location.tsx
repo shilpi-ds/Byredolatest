@@ -18,6 +18,7 @@ import { nearByLocation } from "../types/nearByLocation";
 import { fetch } from "@yext/pages/util";
 import favicon from "../images/favicon.png";
 import { JsonLd } from "react-schemaorg";
+import useUpdateTranslation from "../hooks/useUpdateTranslation";
 import LocationInformation from "../components/locationDetails/LocationInformation";
 import {
   AnalyticsProvider,
@@ -330,7 +331,7 @@ export const transformProps: TransformProps<ExternalApiData> = async (
 ) => {
   let latitude = data?.document?.yextDisplayCoordinate?.latitude;
   let longitude = data?.document?.yextDisplayCoordinate?.longitude;
-  const url = `${AnswerExperienceConfig.endpoints.verticalSearch}?experienceKey=${AnswerExperienceConfig.experienceKey}&api_key=${AnswerExperienceConfig.apiKey}&v=20220511&version=${AnswerExperienceConfig.experienceVersion}&locale=${AnswerExperienceConfig.locale}&location=${latitude},${longitude}&verticalKey=${AnswerExperienceConfig.verticalKey}&limit=4&retrieveFacets=true&skipSpellCheck=false&session_id=12727528-aa0b-4558-9d58-12a815eb3761&sessionTrackingEnabled=true&source=STANDARD`;
+  const url = `${AnswerExperienceConfig.endpoints.verticalSearch}?experienceKey=${AnswerExperienceConfig.experienceKey}&api_key=${AnswerExperienceConfig.apiKey}&v=20220511&version=${AnswerExperienceConfig.experienceVersion}&locale=${data.document.meta.locale}&location=${latitude},${longitude}&verticalKey=${AnswerExperienceConfig.verticalKey}&limit=4&retrieveFacets=true&skipSpellCheck=false&session_id=12727528-aa0b-4558-9d58-12a815eb3761&sessionTrackingEnabled=true&source=STANDARD`;
   const externalApiData = (await fetch(url).then((res: any) =>
     res.json()
   )) as nearByLocation;
@@ -380,7 +381,7 @@ const Location: Template<ExternalApiRenderData> = ({
     dm_directoryChildren
   } = document;
   let templateData = { document: document, __meta: __meta };
-  const { t, i18n } = useTranslation();
+  //const { t, i18n } = useTranslation();
   let hoursSchema = [];
   let breadcrumbScheme = [];
   for (var key in hours) {
@@ -426,6 +427,10 @@ const Location: Template<ExternalApiRenderData> = ({
   // } else {
   //   url = `${document.slug.toString()}.html`;
   // }
+  const { t, i18n } = useTranslation();
+  i18n.changeLanguage(document.meta.locale);
+  useUpdateTranslation(_site, document.meta.locale);
+  
   var currentUrl = ""
   const myArray = path.split("/");
   currentUrl = myArray && myArray[1]

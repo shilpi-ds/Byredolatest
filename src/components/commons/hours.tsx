@@ -1,7 +1,8 @@
+import * as React from "react";
 import { withTranslation } from "react-i18next";
 import { useTranslation } from "react-i18next";
 import "../../types/i18n.tsx";
-import * as React from "react";
+
 
 import { useEffect, useRef, useState } from "react";
 type Hours = {
