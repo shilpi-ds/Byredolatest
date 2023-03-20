@@ -30,7 +30,7 @@ const Footer = (props: any) => {
     phone,
     path,_site,meta
   } = props;
-
+//console.log(_site,"ssss");
   const { t, i18n } = useTranslation();
   //i18n.changeLanguage(meta.locale);
   //useUpdateTranslation(_site, meta.locale);
@@ -43,7 +43,7 @@ const Footer = (props: any) => {
             <div className="subfooter-links">
                
               <ul>
-                <li><LocalesDropdown updatelocale={path} /></li>
+                <li><LocalesDropdown updatelocale={path} country={_site.c_countryFooter}/></li>
                 <li className="text-xl pb-4">{customerCare}</li>
 
                 <li className="icon-row location-phone ">
