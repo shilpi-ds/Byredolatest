@@ -312,7 +312,7 @@ const locatorSearch: Template<TemplateRenderProps> = ({
         footerStoreLocator={_site.c_footerStoreLocator}
         customerCare={_site.c_customerCare}
         phone={_site.mainPhone}
-        emailAddress={_site.c_emailAddress} path={updatelocale}
+        emailAddress={_site.c_emailAddress} path={updatelocale} _site={_site}
       />
       </AnalyticsScopeProvider>
       </AnalyticsProvider>

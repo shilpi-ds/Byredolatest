@@ -182,7 +182,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
     let slug = slugify(slugString);
     url = `${slug}.html`;
   } else {
-    url = `${document.slug.toString()}.html`;
+    url = `${document.slug?.toString()}.html`;
   }
   // <meta name="google-site-verification" content="WIqhwAw2ugRAKEYRRqis1ZfUBbnWe_AXSoDltHceCbI" />
   let metaDescription = document.c_metaDescription
