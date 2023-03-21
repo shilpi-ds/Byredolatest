@@ -11,13 +11,13 @@ const PhotoSlider = (props: any) => {
 
   const photo = photos?.map((element:any) => (     
     
-	<SplideSlide>
-    <div className="relative">
+	// <SplideSlide>
+    <div>
        <img height={height} width={width} src={element?.image?.url} alt=""/>
     <div className="bottom-left absolute bottom-2 left-2 font-semibold text-xl"> {element.description}</div>
    </div>
    
-	</SplideSlide>    
+	// </SplideSlide>    
   ));
   var desktopSliderType: string = "";
   var tabSliderType: string = "";
@@ -40,11 +40,13 @@ const PhotoSlider = (props: any) => {
     mobileSliderCenter = length > 1 ? "" : "center-1";
   return (
     <>
+    
       <h2 className="text-4xl text-center font-medium mt-8 mb-6">{photoGalleryTitle}</h2>
-	  <Splide options={{
+      <div style={{display:"flex"}}>
+	  {/* <Splide options={{
                 rewind: false,
                 type: desktopSliderType,
-                perPage: 4,
+                perPage: 5,
                 perMove: 1,
                 arrows: true,
                 drag: false,
@@ -63,9 +65,10 @@ const PhotoSlider = (props: any) => {
                     type: mobileSliderType,
                   },
                 },
-              }}>
+              }}> */}
           {photo}
-      </Splide>
+      {/* </Splide> */}
+      </div>
     </>
   );
 };

@@ -6,7 +6,7 @@ import "../../types/i18n.tsx";
 
 function LocalesDropdown(props: any) {
   //console.log(props.country);
-  const [color, setColor] = React.useState(null);
+  const [color, setColor] = React.useState("");
   const onColorChange = (e: any) => props.updatelocale(e.target.value);
   const { t, i18n } = useTranslation();
   //const [section, setSection] = useState(0);
@@ -23,7 +23,7 @@ function LocalesDropdown(props: any) {
       <form>
         {/* <select onChange={onColorChange} value={color}> */}
         <select onChange={(e) => {handleClick(e)}}>
-        {props.country?.map((e: any,ind) => {
+        {props.country?.map((e: any,ind:any) => {
           //console.log(e);
                   return (
                     
@@ -43,7 +43,7 @@ function LocalesDropdown(props: any) {
          //console.log(e.language);
         
                   
-                    {props.country[section].language?.map((el: any,indd) => {
+                    {props.country[section].language?.map((el: any,indd:any) => {
                       //console.log(el);
                               return (
                                 

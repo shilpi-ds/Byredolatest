@@ -85,7 +85,7 @@ export const config: TemplateConfig = {
       "mainPhone",
       "geomodifier",
       "yextDisplayCoordinate",
-      
+      "c_photoCategories",
       /*Banner*/
       //"c_bannerImage",
       //"c_bannerTitle",
@@ -99,7 +99,7 @@ export const config: TemplateConfig = {
       //"c_aboutImages",
       /*PhotoGallery*/
       "c_photoGalleryTitle",
-      "photoGallery",
+      //"photoGallery",
 
       /*FAQ's*/
       "c_faqsTitle",
@@ -361,6 +361,7 @@ const Location: Template<ExternalApiRenderData> = ({
     yextDisplayCoordinate,
     timezone,
     c_relatedFaqs,
+    c_photoCategories,
     //c_aboutImages,
     c_faqsTitle,
     c_title,
@@ -369,7 +370,7 @@ const Location: Template<ExternalApiRenderData> = ({
     c_readMore,
     c_canonicalURL,
     c_photoGalleryTitle,
-    photoGallery,
+    //photoGallery,
     geomodifier,
     c_faqsDescription,
     //c_bannerImage,
@@ -380,6 +381,7 @@ const Location: Template<ExternalApiRenderData> = ({
     dm_directoryParents,
     dm_directoryChildren
   } = document;
+  console.log(c_photoCategories,"gallery");
   let templateData = { document: document, __meta: __meta };
   //const { t, i18n } = useTranslation();
   let hoursSchema = [];
@@ -430,13 +432,14 @@ const Location: Template<ExternalApiRenderData> = ({
   const { t, i18n } = useTranslation();
   i18n.changeLanguage(document.meta.locale);
   useUpdateTranslation(_site, document.meta.locale);
-  
+
   var currentUrl = ""
   const myArray = path.split("/");
   currentUrl = myArray && myArray[1]
   //console.log(currentUrl,"CURRENT")
   const updatelocale = (locale: any) => {
-    return (window.location.pathname = `${locale}/${currentUrl}`);
+    //console.log(locale,"test");
+   return (window.location.pathname = `${locale}/${currentUrl}`);
   };
   return (
     <>
@@ -545,14 +548,14 @@ const Location: Template<ExternalApiRenderData> = ({
           parents={dm_directoryParents}
           address={address}
         ></BreadCrumbs> */}
-          <div className="store-time text-5xl text-center font-semibold mb-4">
+          {/* <div className="store-time text-5xl text-center font-semibold mb-4">
             {hours && (
               <OpenCloseStatus
                 timezone={timezone ? timezone : defaultTimeZone}
                 hours={hours ? hours : ""} site={_site}
               ></OpenCloseStatus>
             )}
-          </div>
+          </div> */}
           <LocationInformation
             prop={hours}
             coords={yextDisplayCoordinate}
@@ -574,9 +577,9 @@ const Location: Template<ExternalApiRenderData> = ({
               />
             )}
           </div>
-          {photoGallery && c_photoGalleryTitle && (
+          {c_photoCategories && c_photoGalleryTitle && (
           <PhotoSlider
-            photos={photoGallery}
+            photos={c_photoCategories}
             photoGalleryTitle={c_photoGalleryTitle}
           />
           )}

@@ -264,7 +264,8 @@ const locatorSearch: Template<TemplateRenderProps> = ({
   const myArray = path.split("/");
   currentUrl = myArray && myArray[1]
   const updatelocale = (locale: any) => {
-    return (window.location.pathname = `${locale}/${currentUrl}`);
+    console.log(locale,"locale");
+   // return (window.location.pathname = `${locale}/${currentUrl}`);
   };
 
   return (
