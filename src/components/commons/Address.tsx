@@ -3,14 +3,11 @@
  * @param props
  * @returns Html elements of Address Component..
  */
-
 import * as React from "react";
-import { svgIcons } from "../../svg icons/svgIcon";
 const Address = (props: any) => {
   const { address } = props;
   return (
-    <h4 className="icon-row location-address">
-      {/* <span className="icon">{svgIcons.address}</span> */}
+    <h4 className="location-address">
       <span className="">{address?.line1}</span> <br />
       {address?.line2 && (
         <span className="">

@@ -218,8 +218,8 @@ export default function InputDropdown({
       }
     }
   });
-  function getCoordinates(address:String){
-    fetch("https://maps.googleapis.com/maps/api/geocode/json?address="+address+'london &key=AIzaSyDZNQlSlEIkFAct5VzUtsP4dSbvOr2bE18')
+  function getCoordinates(address:string){
+    fetch("https://maps.googleapis.com/maps/api/geocode/json?address="+address+'&key=AIzaSyDZNQlSlEIkFAct5VzUtsP4dSbvOr2bE18')
       .then(response => response.json())
       .then(data => {
        if(data.status == "OK"){

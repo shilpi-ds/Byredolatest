@@ -4,8 +4,6 @@ import { cookieText, cookieText1, cookieUrl } from "../../config/globalConfig";
 import LocalesDropdown from "../../components/commons/LanguageDropdown";
 import { Link } from "@yext/pages/components";
 import { svgIcons } from "../../svg icons/svgIcon";
-import { useTranslation } from "react-i18next";
-import useUpdateTranslation from "../../hooks/useUpdateTranslation";
 
 type props = {
   footerHelpSection: any;
@@ -14,8 +12,6 @@ type props = {
   customerCare: any;
   emailAddress: any;
   path:any;
-  _site:any;
-  meta:any;
 };
 const Footer = (props: any) => {
   const {
@@ -28,26 +24,19 @@ const Footer = (props: any) => {
     footerStoreLocator,
     customerCare,
     phone,
-    path,_site,meta
+    path,_site
   } = props;
-//console.log(_site,"ssss");
-  const { t, i18n } = useTranslation();
-  //i18n.changeLanguage(meta.locale);
-  //useUpdateTranslation(_site, meta.locale);
 
   return (
     <>
       <div className="subfooter-sec">
         <div className="container-lg">
           <div className="subfooter-inner">
-            <div className="subfooter-links">
-               
+            <div className="subfooter-links">  
               <ul>
-                <li><LocalesDropdown updatelocale={path} country={_site.c_countryFooter}/></li>
+              <li><LocalesDropdown updatelocale={path} country={_site.c_countryFooter}/></li>
                 <li className="text-xl pb-4">{customerCare}</li>
-
-                <li className="icon-row location-phone ">
-                  <span className="icon">{svgIcons.phone}</span>
+                <li className="location-phone ">
                   <Link
                     className="phone-number"
                     data-ya-track="phone"
@@ -58,8 +47,7 @@ const Footer = (props: any) => {
                   </Link>
                 </li>
                 {emailAddress?.link && emailAddress?.label && (
-                  <li className="icon-row location-phone ">
-                    <span className="icon">{svgIcons.email}</span>
+                  <li className="location-phone ">               
                     <Link
                       className="link-line-text relative"
                       href={`mailto:${emailAddress.link}`}
@@ -140,5 +128,3 @@ const Footer = (props: any) => {
   );
 };
 export default Footer;
-
-

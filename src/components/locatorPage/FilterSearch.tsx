@@ -9,6 +9,7 @@ import {  useComposedCssClasses } from "../../hooks/useComposedCssClasses";
 import { CompositionMethod } from "../../hooks/CompositionMethod";
 import { AnswerExperienceConfig, googleMapsApiKey, limit } from "..//../config/globalConfig";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 const SCREENREADER_INSTRUCTIONS = '';
 
@@ -121,14 +122,14 @@ export default function FilterSearch ({
     });
     screenReaderText = screenReaderPhrases.join(' ');
   }
-
+  const { t } = useTranslation();
   return (
     <div className={cssClasses.container}>
       {/* <h1 className={cssClasses.label}>{label}</h1> */}
       <InputDropdown
         inputValue={input}
         params={params}
-        placeholder='Enter address, city, postalcode'
+        placeholder={t("Enter address, city, postalcode")}
         //screenReaderInstructionsId={SCREENREADER_INSTRUCTIONS}
         screenReaderText={screenReaderText}
         onlyAllowDropdownOptionSubmissions={true}

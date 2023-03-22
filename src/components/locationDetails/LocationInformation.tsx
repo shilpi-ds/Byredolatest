@@ -21,8 +21,10 @@ type props = {
   hours: any;
   additionalHoursText: any;
   site:any;
+  name:any;
 };
 const LocationInformation = (data: props) => {
+  console.log(data);
   const [modalIsOpen, setIsOpen] = useState(false);
 //console.log(data,"data");
   let subtitle: any;
@@ -114,7 +116,8 @@ const LocationInformation = (data: props) => {
             <div className="box store-info">
               <div className="inner-box">
                 <h4 className="box-title">
-                 {data.site.c_storeInformation} 
+                 {/* {data.site.c_storeInformation}  */}
+                 {data.name}
                 </h4>
                 <Address address={data.address}></Address>
                 <Phone phone={data.phone} />
@@ -234,7 +237,7 @@ const LocationInformation = (data: props) => {
               </>
             )}
 
-            {data?.prop ? (
+            {/* {data?.prop ? (
               <>
                 {Object.keys(data?.hours).length > 0 ? (
                   <>
@@ -262,7 +265,7 @@ const LocationInformation = (data: props) => {
                   </div>
                 </div>
               </>
-            )}
+            )} */}
           </div>
         </div>
       </div>

@@ -64,7 +64,7 @@ const FilterAwesome = (props: any) => {
     <div className="filterButton">
       {filterbutton && (
         <button className="current-location hide-mob" onClick={openModal}>
-          <div className="flex flex-row font-semibold">{svgIcons.filtericon} <span className="pl-1 text-white">Filter</span>  </div>
+          <div className="flex flex-row font-semibold">{svgIcons.filtericon} <span className="pl-2 text-black">Filter</span>  </div>
         </button>
       )}
 
@@ -73,7 +73,6 @@ const FilterAwesome = (props: any) => {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        {/* <h3 className="popup-title">Dream</h3> */}
         <a
           onClick={closeModal}
           type="button"

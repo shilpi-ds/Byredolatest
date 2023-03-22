@@ -1,8 +1,5 @@
-import * as React from "react";
-import { withTranslation } from "react-i18next";
 import { useTranslation } from "react-i18next";
-import "../../types/i18n.tsx";
-
+import * as React from "react";
 
 import { useEffect, useRef, useState } from "react";
 type Hours = {
@@ -265,7 +262,7 @@ const DayRow = (props: DayRow) => {
                     <>
                       {openint.isClosed ? (
                         <div className="pr-1">
-                          <span className="time-hours">{t("closed")}</span>
+                          <span className="time-hours">{t("Closed")}</span>
                         </div>
                       ) : (
                         openint?.openIntervals &&
@@ -318,7 +315,7 @@ const DayRow = (props: DayRow) => {
    </span>
  </td> :
        <td className="pr-1">
-          <span className="time-hours">{t("closed")}</span>
+          <span className="time-hours">{t("Closed")}</span>
         </td>
       )}
     </tr>

@@ -6,6 +6,7 @@ import {
   twMerge,
   useComposedCssClasses,
 } from "..//../hooks/useComposedCssClasses";
+import { useTranslation } from "react-i18next";
 import useFetchResults from "../../hooks/useFetchResults";
 import Address from "../commons/Address";
 import { Link } from "@yext/pages/components";
@@ -13,16 +14,13 @@ import Phone from "../commons/phone";
 import Mapicon from "..//../images/map1.svg";
 import UserMarker from "../../images/user.svg";
 import MapiconHover from "..//../images/map-pin-hover.svg";
-import Hours from "../commons/hours";
 import { renderToString } from "react-dom/server";
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
 import OpenCloseStatus from "..//../components/commons/OpenCloseStatus";
-import { svgIcons } from "../../svg icons/svgIcon";
 import clustericon from "../../images/cluster1.png";
 import getDirectionUrl from "../commons/GetDirection";
 import { slugify, defaultTimeZone } from "../../config/globalConfig";
 import $ from "jquery";
-import { Marker } from "mapbox-gl";
 let marker:any;
 /**
  * CSS class interface for the {@link GoogleMaps} component
@@ -296,7 +294,7 @@ function UnwrappedGoogleMaps({
       bounds.extend(center);
       bounds.extend(position);
       map.fitBounds(bounds);
-      searchCenter = bounds.getCenter();
+      const searchCenter = bounds.getCenter();
       searchZoom = map.getZoom();
     },1000);
   }
@@ -330,7 +328,7 @@ function UnwrappedGoogleMaps({
       
       // if (!openInfoWindow) {
       markerPins.current[i].setIcon(marker_hover_icon);        
-      locationResults.map((result, index) => {
+      locationResults.map((result: any, index: number) => {
         if (i == index) {
           let resultelement = document.querySelectorAll(
             `.result-list-inner-${index + 1}`
@@ -378,7 +376,7 @@ function UnwrappedGoogleMaps({
       setHover(true);
       openInfoWindow = false;
       infoWindow.current.close();
-      locationResults.map((result, index) => {
+      locationResults.map((result: any, index: number) => {
         let resultelement = document.querySelectorAll(
           `.result-list-inner-${index + 1}`
         );
@@ -505,6 +503,7 @@ function UnwrappedGoogleMaps({
     return miles.toFixed(2);
   };
 
+  const { t, i18n } = useTranslation();
   /** Function InfowindowContents returns Html*/
   function InfowindowContents(i: Number, result: any): void {    
     var url = "";
@@ -522,7 +521,7 @@ function UnwrappedGoogleMaps({
           <h3 className="nameData">
             <Link href={`${url}`}>{result.name} </Link>
           </h3>
-          <p className="miles">{metersToMiles(result.distance ?? 0)} miles</p>
+          <p className="miles">{metersToMiles(result.distance ?? 0)} {t("miles")}</p>
         </div>
         <Link
           data-ya-track="getdirections"
@@ -536,12 +535,11 @@ function UnwrappedGoogleMaps({
         </Link>
         <Phone phone={result.rawData.mainPhone} />
 
-        {result?.rawData?.hours ? (
+        {result?.rawData?.hours && (
           <>
             {Object.keys(result?.rawData?.hours).length > 1 ? (
               <>
-                <div className="icon-row openStatus">
-                  <span className="icon">{svgIcons.openclosestatus}</span>
+                <div className="openStatus">
                   <OpenCloseStatus
                     hours={result?.rawData?.hours}
                     timezone={
@@ -556,14 +554,23 @@ function UnwrappedGoogleMaps({
               <></>
             )}
           </>
-        ) : (
-          <></>
         )}
-        <div className="map-buttons md:hidden text-center">
+
+
+     <div className="buttons">
+      <div className="ctaBtn">
+          <Link className="button" href={`${url}`}>
+           {t("View Details")}
+          </Link>
+        </div>
+       
+      </div>
+
+        {/* <div className="map-buttons md:hidden text-center">
           <Link
             data-ya-track="getdirections"
             eventName={`getdirections`}
-            className="direction button before-icon"
+            className="direction button"
             onClick={() => getDirectionUrl(result.rawData)}
             href="javascript:void(0);"
             id="some-button1"
@@ -578,21 +585,21 @@ function UnwrappedGoogleMaps({
           >
             {svgIcons.phone} Call
           </Link>
-        </div>
+        </div> */}
       </div>
     );
-    function mobiledirection() {
-      getDirectionUrl(result.rawData);
-    }
-    google.maps.event.addListener(infoWindow.current, "domready", (e: any) => {
-      const someButton = document.getElementById("some-button");
-      someButton?.addEventListener("click", mobiledirection);
-    });
+    // function mobiledirection() {
+    //   getDirectionUrl(result.rawData);
+    // }
+    // google.maps.event.addListener(infoWindow.current, "domready", (e: any) => {
+    //   const someButton = document.getElementById("some-button");
+    //   someButton?.addEventListener("click", mobiledirection);
+    // });
 
-    google.maps.event.addListener(infoWindow.current, "domready", (e: any) => {
-      const someButton = document.getElementById("some-button1");
-      someButton?.addEventListener("click", mobiledirection);
-    });
+    // google.maps.event.addListener(infoWindow.current, "domready", (e: any) => {
+    //   const someButton = document.getElementById("some-button1");
+    //   someButton?.addEventListener("click", mobiledirection);
+    // });
 
     let string = renderToString(MarkerContent);
     infoWindow.current.setContent(string);
@@ -627,19 +634,10 @@ function getPosition(result: Result) {
   return { lat, lng };
 }
 export function scrollToRow(index: any) {
-  let result = [].slice.call(document.querySelectorAll(".result") || [])[0];
-  let offset = 0;
-  if (
-    typeof [].slice.call(document.querySelectorAll(".result") || [])[index] !=
-    "undefined"
-  ) {
-    offset =
-      [].slice.call(document.querySelectorAll(".result") || [])[index]
-        .offsetTop - result.offsetTop;
-    [].slice
-      .call(document.querySelectorAll(".result-list") || [])
-      .forEach(function (el) {
-        el.scrollTop = offset;
-      });
-  }
+  let result: any = [].slice.call(document.querySelectorAll(`.result`) || [])[0];
+  let offset: any = [].slice.call(document.querySelectorAll(`.result`) || [])[index];
+  let o = offset.offsetTop - result.offsetTop;
+  [].slice.call(document.querySelectorAll(".scrollbar-container") || []).forEach(function (el: any) {
+    el.scrollTop = o;
+  });
 }

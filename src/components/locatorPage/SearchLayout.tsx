@@ -13,6 +13,7 @@ import {
   googleMapsConfig,
   limit,
 } from "..//../config/globalConfig";
+import { useTranslation } from "react-i18next";
 import Geocode from "react-geocode";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
@@ -25,6 +26,7 @@ import { Link } from "@yext/pages/components";
 
 var mapzoom = 8;
 const SearchLayout = (props: any): JSX.Element => {
+  console.log('props', props)
   const [isLoading, setIsloading] = React.useState(true);
   const [zoomlevel, setZoomlevel] = React.useState(7);
   const [centerLatitude, setCenterLatitude] = useState(
@@ -35,6 +37,7 @@ const SearchLayout = (props: any): JSX.Element => {
   );
   const [active, setActive] = useState("");
   const locationResults = useFetchResults() || [];
+  console.log('locationResults', locationResults)
   const alternateResult =
     useSearchState(
       (s) => s.vertical.noResults?.allResultsForVertical.results
@@ -67,98 +70,7 @@ const SearchLayout = (props: any): JSX.Element => {
     }, 3100);
   };
 
-  // let userMyLocationBlockMessage = props.userMyLocationBlockMessage;
-  // let NoLocationsAvailable= props.NoLocationsAvailable;
 
-  const onClick = () => {
-    setZoomlevel(3);
-    setInputValue("");
-
-    if (navigator.geolocation) {
-      const error = (error: any) => {
-        if (error.code == 1) {
-          setallowLocation("Please allow your Location");
-        }
-        setUserShareLocation(false);
-      };
-      navigator.geolocation.getCurrentPosition(
-        function (position) {
-          Geocode.setApiKey(googleMapsConfig.googleMapsApiKey);
-          Geocode.fromLatLng(
-            position.coords.latitude,
-            position.coords.longitude
-          ).then(
-            (response: any) => {
-              if (response.results[0]) {
-                setInputValue(response.results[0].formatted_address);
-                document
-                  .getElementsByClassName("FilterSearchInput")[0]
-                  .setAttribute("value", response.results[0].formatted_address);
-                setallowLocation("");
-                searchActions.setUserLocation({
-                  latitude: position.coords.latitude,
-                  longitude: position.coords.longitude,
-                });
-              }
-            },
-            (error: any) => {
-              console.error(error);
-              setCheck(false);
-            }
-          );
-          setCenterLatitude(position.coords.latitude);
-          setCenterLongitude(position.coords.longitude);
-
-          searchActions.setUserLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
-          searchActions.setVertical(AnswerExperienceConfig.verticalKey);
-          // searchActions.setQuery(response.results[0].formatted_address);
-          searchActions.setOffset(0);
-          searchActions.setVerticalLimit(limit);
-          searchActions.executeVerticalQuery();
-        },
-        error,
-        {
-          timeout: 10000,
-        }
-      );
-    }
-  };
-
-  const getParents = (elem: any) => {
-    while (
-      elem.parentNode &&
-      elem.parentNode.nodeName.toLowerCase() != "body"
-    ) {
-      elem = elem.parentNode;
-      if (elem.classList.contains("options")) {
-        return true;
-      }
-    }
-    return false;
-  };
-  const Findinput = () => {
-    let searchKey = document.getElementsByClassName("FilterSearchInput");
-    let Search = searchKey[0].value;
-    searchActions.setOffset(0);
-    if (Search.length) {
-      setInputValue("");
-      getCoordinates(Search);
-    }
-  };
-  const handleInputValue = () => {
-    setInputValue("");
-  };
-  const handleSetUserShareLocation = (value: any, userShareStatus: boolean) => {
-    // console.log('handleSetUserShareLocation', value, userShareStatus);
-    setInputValue(value);
-    if (!userShareStatus) {
-      setCenterLatitude(googleMapsConfig.centerLatitude);
-      setCenterLongitude(googleMapsConfig.centerLongitude);
-    }
-  };
 
   useEffect(() => {
     if (firstTimeRunners) {
@@ -171,11 +83,11 @@ const SearchLayout = (props: any): JSX.Element => {
     }
   }, []);
 
-  function getCoordinates(address: String) {
+  function getCoordinates(address: string) {
     fetch(
       "https://maps.googleapis.com/maps/api/geocode/json?address=" +
         address +
-        "london &key=AIzaSyDZNQlSlEIkFAct5VzUtsP4dSbvOr2bE18"
+        "&key=AIzaSyDZNQlSlEIkFAct5VzUtsP4dSbvOr2bE18"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -186,7 +98,6 @@ const SearchLayout = (props: any): JSX.Element => {
             let params = { latitude: userlatitude, longitude: userlongitude };
             setCenterLatitude(userlatitude);
             setCenterLongitude(userlongitude);
-            //   searchActions.setUserLocation(params);
             searchActions.setQuery(address);
             searchActions.executeVerticalQuery();
           });
@@ -205,87 +116,15 @@ const SearchLayout = (props: any): JSX.Element => {
     document.body.setAttribute("class", "mapView");
     setActive("");
   };
-  const loader = isLoading ? <LoadingSpinner /> : "";
+  //const loader = isLoading ? <LoadingSpinner /> : "";
+
+  const { t, i18n } = useTranslation();
   return (
     <>
-      {loader}
+      {/* {loader} */}
       <div className="locator-full-width place-content-center">
         <div className="locator-container">
-          <div className="search-block">
-            {allowlocation.length > 0 ? (
-              <div className="for-allow">{allowlocation}</div>
-            ) : (
-              ""
-            )}
 
-            <div className="location-with-filter">
-              <h3 className="title">Enter a town or postcode</h3>
-
-              {/* Use My Location button */}
-              <button
-                className="ghost-button before-icon"
-                title="Search using your current location!"
-                id="useLocation"
-                onClick={onClick}
-              >
-                {svgIcons.useMyLocation}
-                Use My Location
-              </button>
-            </div>
-
-            {/* Search Input by name,address  */}
-            <div className="search-form">
-              <FilterSearch
-                customCssClasses={{
-                  filterSearchContainer: "mb-0",
-                  inputElement: "FilterSearchInput",
-                  optionsContainer: "options",
-                }}
-                inputvalue={inputvalue}
-                searchOnSelect={false}
-                searchFields={[
-                  {
-                    entityType: "location",
-                    fieldApiName: "name",
-                  },
-                  {
-                    entityType: "location",
-                    fieldApiName: "address.line1",
-                  },
-                  {
-                    entityType: "location",
-                    fieldApiName: "address.line2",
-                  },
-                  {
-                    entityType: "location",
-                    fieldApiName: "address.city",
-                  },
-                  {
-                    entityType: "location",
-                    fieldApiName: "address.postalCode",
-                  },
-                ]}
-                handleInputValue={handleInputValue}
-                handleSetUserShareLocation={handleSetUserShareLocation}
-              />
-              <div className="flex justify-between"> <ResultsCount/>
-              {/* Filter */}
-              <FilterAwesome
-                customCssClasses={{ container: "filter-items" }}
-                defaultExpanded={true}
-              ></FilterAwesome></div>
-             
-              {/* Search icon Button  */}
-              <button
-                className="button"
-                aria-label="Search bar icon"
-                id="search-location-button"
-                onClick={Findinput}
-              >
-                {svgIcons.Searchbaricon}
-              </button>
-            </div>
-          </div>
 
           {/* Map view and List View CTA in mobile responsive  */}
           <div className="mobile-btns">
@@ -306,7 +145,7 @@ const SearchLayout = (props: any): JSX.Element => {
               {svgIcons.mapView} Map View
             </Link>
           </div>
-
+        
           {/* Map Section  */}
           <div className="map-section">
             <GoogleMaps
@@ -325,12 +164,11 @@ const SearchLayout = (props: any): JSX.Element => {
               buttonLabel={"Load More"}
             />
           </div>
-          {alternateResult && alternateResult.length > 0 ? (
+          <ResultsCount/>
+          {alternateResult && alternateResult.length > 0 && (
             <p className="pt-2 pb-3 text-lg text-center no-lc-err-msg">
-              No Locations Found
+              {t("No Locations Found")}
             </p>
-          ) : (
-            <></>
           )}
 
           {/* Result listing Section  */}

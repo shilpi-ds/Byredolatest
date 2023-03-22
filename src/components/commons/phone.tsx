@@ -1,5 +1,4 @@
 import * as React from "react";
-import { svgIcons } from "../../svg icons/svgIcon";
 import { formatPhoneNumber } from "react-phone-number-input";
 import { Link } from "@yext/pages/components";
 const Phone = (props: any) => {
@@ -8,8 +7,7 @@ const Phone = (props: any) => {
   return (
     <>
       {phone && (
-        <div className="icon-row location-phone ">
-          {/* <span className="onhighLight icon">{svgIcons.phone}</span> */}
+        <div className="location-phone ">
           <Link
             className="phone-number onhighLight"
             data-ya-track="phone"

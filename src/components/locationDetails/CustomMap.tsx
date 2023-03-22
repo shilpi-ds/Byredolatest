@@ -1,6 +1,6 @@
 import * as React from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import Mapicon from "..//../images/map1.svg";
+import Mapicon from "../../images/map1.svg";
 const containerStyle = {
   width: "100%",
   height: "100%",

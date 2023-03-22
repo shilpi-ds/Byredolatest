@@ -1,9 +1,7 @@
 import * as React from "react";
-import "../../types/i18n";
-import { useTranslation } from 'react-i18next';
-import useUpdateTranslation from "../../hooks/useUpdateTranslation";
+import { useTranslation } from "react-i18next";
 const openClose = {
-  formatOpenNowString: (hoursData: any, timeZone: any) => {
+  formatOpenNowString: (hoursData: any, timeZone: any ,t: any) => {
     var Day = 0;
     const now = new Date();
     let currentTime = new Date(
@@ -181,8 +179,8 @@ const openClose = {
       "Friday",
       "Saturday",
     ];
-    const { t, i18n } = useTranslation();
-    let hoursString = `${t("closed")}`;
+
+    let hoursString = `<strong><span>${t("Closed")}</span></strong>`;
     if (openRightNow) {
       if (
         currentInterval.start === "00:00" &&
@@ -190,21 +188,21 @@ const openClose = {
       ) {
         hoursString = "Open 24 Hours";
       } else {
-        hoursString = `${t("Open - Closed at")} [closingTime]`;
+        hoursString = `${t("Open - Closes at")} [closingTime]`;
         hoursString = hoursString.replace("[closingTime]", currentInterval.end);
       }
     } else if (nextInterval) {
       if (nextIsTomorrow) {
-        hoursString = `${t("Closed - Open at")} [openingTime] ${week[Day]} `;
+        hoursString = `${t("Closed - Opens at")} [openingTime] ${week[Day]} `;
         hoursString = hoursString.replace("[openingTime]", nextInterval.start);
       } else {
-        hoursString = `${t("Closed - Open at")} [openingTime]`;
+        hoursString = `${t("Closed - Opens at")} [openingTime]`;
         hoursString = hoursString.replace("[openingTime]", nextInterval.start);
       }
     }
     return hoursString;
   },
-  getYextTimeWithUtcOffset: (entityUtcOffsetSeconds) => {
+  getYextTimeWithUtcOffset: (entityUtcOffsetSeconds:any) => {
     const now = new Date();
     let utcOffset = 0;
     if (entityUtcOffsetSeconds) {
@@ -315,13 +313,13 @@ export default function OpenCloseStatus(props: any) {
   return (
     <div className="">
       {props?.hours && props?.hours?.reopenDate ? (
-        <p className="">{t("temporarily_closed")}</p>
+        <p className="">{t("Temporarily Closed")}</p>
       ) : props?.hours ? (
         <p className="closeing-div onhighLight">
-          {openClose.formatOpenNowString(props.hours, props.timezone)}
+          {openClose.formatOpenNowString(props.hours, props.timezone,t)}
         </p>
       ) : (
-        <p className="closed">{t("closed")}</p>
+        <p className="closed">{t("Closed")}</p>
       )}
     </div>
   );

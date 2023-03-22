@@ -108,25 +108,15 @@ const BreadCrumbs = (props: data) => {
     <div className="breadcrumb">
       <div className="container">
         <ul>
-          <li className="home-li">
-            <Link href="/index.html">{svgIcons.homeIcon}</Link>
+          <li className="home">
+            <Link href="/index.html">Home</Link>
+          </li>
+          <li className="locator">
+            <Link href="/index.html">Locator</Link>
           </li>
           {list && (
             list)
-          // ) : (
-          //   <>
-          //     {props.address && props.address.city ? (
-          //       <li>
-          //         <a href={props.address.city + ".html"}>
-          //         sdsj  {props.address.city ? props.address.city : ""}
-          //         </a>
-          //       </li>
-          //     ) : (
-          //     <></>
-          //     )}
-          //   </>
-          // )
-}
+            }
           <li>{props && props.name}</li>
         </ul>
       </div>

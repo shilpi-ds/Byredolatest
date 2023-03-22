@@ -19,15 +19,23 @@ import {
 import Header from "../components/layouts/header";
 import { JsonLd } from "react-schemaorg";
 import favicon from "../images/favicon.png";
+import Herobanner from "../components/locatorPage/SearchFile";
 import SearchLayout from "../components/locatorPage/SearchLayout";
-import { AnswerExperienceConfig, slugify,GoogleSearchConsole,BaseUrl,AnalyticsEnableDebugging,AnalyticsEnableTrackingCookie } from "../config/globalConfig";
+import {
+  AnswerExperienceConfig,
+  slugify,
+  GoogleSearchConsole,
+  BaseUrl,
+  AnalyticsEnableDebugging,
+  AnalyticsEnableTrackingCookie,
+} from "../config/globalConfig";
 import LocatorBread from "../components/locatorPage/LocatorBread";
-import Banner from "../components/commons/LocatorBanner";
 import Footer from "../components/layouts/footer";
 import {
   AnalyticsProvider,
   AnalyticsScopeProvider,
 } from "@yext/pages/components";
+import { Schema } from "../types/types";
 
 export const config: TemplateConfig = {
   stream: {
@@ -59,44 +67,18 @@ export const config: TemplateConfig = {
       "c_robotsTag",
     ],
     localization: {
-      locales: ["en_GB","fr-FR","it-IT","ja-JP","de-DE"],
+      locales: ["en_GB", "fr-FR", "it-IT", "ja-JP", "de-DE"],
       primary: false,
     },
   },
 };
 
-// var url = "";
-// export const getPath: GetPath<TemplateProps> = ({ document }) => {
-//   if (!document.slug) {
-//     let slugString = document.id + " " + document.name;
-//     let slug = slugify(slugString);
-//     url = `index.html`;
-//   } else {
-//     url = `${document.slug.toString()}.html`;
-//   }
-//   return url;
-// };
-// export const getPath: GetPath<TemplateProps> = () => {
-//   return `index.html`;
-// };
-
-var url = "";
-var currentUrl: any;
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  var url = "";
-  var name: any = document.name?.toLowerCase();
-  var string: any = name?.toString();
-  let result: any = string?.replaceAll(" ", "-");
-
-  if (!document.slug) {
-    currentUrl = `index.html`;
-    url = `${document.meta.locale}/index.html`;
-    //console.log(url);
-  } else {
-    currentUrl = `${document.slug.toString()}.html`;
-    url = `${document.meta.locale}/${document.slug.toString()}.html`;
+  let url = `${document.meta.locale}/index.html`;
+  if (document.meta.locale === "en_GB") {
+    url = `index.html`;
   }
-
+  console.log(url, "url");
   return url;
 };
 
@@ -146,7 +128,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         type: "meta",
         attributes: {
           name: "author",
-          content: "Well Pharma",
+          content: "Byredo",
         },
       },
 
@@ -167,9 +149,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         attributes: {
           rel: "canonical",
           href: `${
-            document.c_canonical
-              ? document.c_canonical
-              : BaseUrl
+            document.c_canonical ? document.c_canonical : `${BaseUrl}/${path}`
           }`,
         },
       },
@@ -192,7 +172,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         type: "meta",
         attributes: {
           property: "og:url",
-          content: BaseUrl,
+          content: `${BaseUrl}/${path}`,
         },
       },
 
@@ -200,7 +180,11 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         type: "meta",
         attributes: {
           property: "og:image",
-          content: `${document.c_byradoLogo ? document.c_byradoLogo.image.url : "https://a.mktgcdn.com/p-sandbox/cgYD0VBchE2WzmtcTHsS1MlzQyFCTlbcmgppR7wnNE8/600x120.png"}`,
+          content: `${
+            document.c_byradoLogo
+              ? document.c_byradoLogo.image.url
+              : "https://a.mktgcdn.com/p-sandbox/cgYD0VBchE2WzmtcTHsS1MlzQyFCTlbcmgppR7wnNE8/600x120.png"
+          }`,
         },
       },
       // twitter tag
@@ -222,7 +206,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         type: "meta",
         attributes: {
           name: "twitter:url",
-          content: BaseUrl,
+          content: `${BaseUrl}/${path}`,
         },
       },
 
@@ -238,12 +222,17 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         type: "meta",
         attributes: {
           name: "twitter:image",
-          content: `${document.c_byradoLogo ? document.c_byradoLogo.image.url : "https://a.mktgcdn.com/p-sandbox/cgYD0VBchE2WzmtcTHsS1MlzQyFCTlbcmgppR7wnNE8/600x120.png"}`,
+          content: `${
+            document.c_byradoLogo
+              ? document.c_byradoLogo.image.url
+              : "https://a.mktgcdn.com/p-sandbox/cgYD0VBchE2WzmtcTHsS1MlzQyFCTlbcmgppR7wnNE8/600x120.png"
+          }`,
         },
       },
-     ],
+    ],
   };
 };
+
 const locatorSearch: Template<TemplateRenderProps> = ({
   relativePrefixToRoot,
   path,
@@ -257,26 +246,28 @@ const locatorSearch: Template<TemplateRenderProps> = ({
     disableDefaultUI: true,
   };
 
-  
   const { t, i18n } = useTranslation();
   i18n.changeLanguage(`${document.meta.locale}`);
-  var currentUrl = ""
+  var currentUrl = "";
   const myArray = path.split("/");
-  currentUrl = myArray && myArray[1]
+  currentUrl = myArray && myArray[1];
   const updatelocale = (locale: any) => {
-    console.log(locale,"locale");
-   // return (window.location.pathname = `${locale}/${currentUrl}`);
+    return (window.location.pathname = `${locale}/${currentUrl}`);
   };
 
   return (
     <>
-      <JsonLd<locator>
+      <JsonLd<Schema>
         item={{
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "Byredo",
-          url: "https://www.byredo.com/eu_en/",
-          logo: `${document.c_byradoLogo ? document.c_byradoLogo.image.url : "https://a.mktgcdn.com/p-sandbox/cgYD0VBchE2WzmtcTHsS1MlzQyFCTlbcmgppR7wnNE8/600x120.png"}`,
+          url: `${BaseUrl}/${path}`,
+          logo: `${
+            document.c_byradoLogo
+              ? document.c_byradoLogo.image.url
+              : "https://a.mktgcdn.com/p-sandbox/cgYD0VBchE2WzmtcTHsS1MlzQyFCTlbcmgppR7wnNE8/600x120.png"
+          }`,
         }}
       />
       <AnalyticsProvider
@@ -285,37 +276,38 @@ const locatorSearch: Template<TemplateRenderProps> = ({
         enableTrackingCookie={AnalyticsEnableTrackingCookie}
       >
         <AnalyticsScopeProvider name={""}>
-      <Header
-        ByredoLogo={_site.c_byradoLogo}
-        ByredoLinks={_site.c_headerMenus}
-      />
-
-      <Banner
-        BannerImage={_site.c_bannerImage}
-        Title={_site.c_bannerTitle}
-        Description={_site.c_bannerDescription}
-      />
-      <LocatorBread />
-      <SearchHeadlessProvider
-        experienceKey={AnswerExperienceConfig.experienceKey}
-        locale={document.meta.locale}
-        apiKey={AnswerExperienceConfig.apiKey}
-        verticalKey={AnswerExperienceConfig.verticalKey}
-        experienceVersion={AnswerExperienceConfig.experienceVersion}
-        sessionTrackingEnabled={AnswerExperienceConfig.sessionTrackingEnabled}
-        endpoints={AnswerExperienceConfig.endpoints}
-      >
-        <SearchLayout />
-      </SearchHeadlessProvider>
-      <Footer
-        footerHelpSection={_site.c_footerHelpSection}
-        servicesFooter={_site.c_servicesFooter}
-        footerStoreLocator={_site.c_footerStoreLocator}
-        customerCare={_site.c_customerCare}
-        phone={_site.mainPhone}
-        emailAddress={_site.c_emailAddress} path={updatelocale} _site={_site}
-      />
-      </AnalyticsScopeProvider>
+          <Header
+            ByredoLogo={_site.c_byradoLogo}
+            ByredoLinks={_site.c_headerMenus}
+          />
+          <LocatorBread />
+         
+          <SearchHeadlessProvider
+            experienceKey={AnswerExperienceConfig.experienceKey}
+            locale={document.meta.locale}
+            apiKey={AnswerExperienceConfig.apiKey}
+            verticalKey={AnswerExperienceConfig.verticalKey}
+            experienceVersion={AnswerExperienceConfig.experienceVersion}
+            sessionTrackingEnabled={
+              AnswerExperienceConfig.sessionTrackingEnabled
+            }
+            endpoints={AnswerExperienceConfig.endpoints}
+          >
+            <Herobanner></Herobanner>
+            
+            <SearchLayout site ={_site}/>
+          </SearchHeadlessProvider>
+          <Footer
+            footerHelpSection={_site.c_footerHelpSection}
+            servicesFooter={_site.c_servicesFooter}
+            footerStoreLocator={_site.c_footerStoreLocator}
+            customerCare={_site.c_customerCare}
+            phone={_site.mainPhone}
+            emailAddress={_site.c_emailAddress} path={updatelocale}
+            _site={_site}
+            meta={__meta}
+          />
+        </AnalyticsScopeProvider>
       </AnalyticsProvider>
     </>
   );

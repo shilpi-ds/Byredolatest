@@ -20,6 +20,8 @@ import favicon from "../images/favicon.png";
 import { JsonLd } from "react-schemaorg";
 import useUpdateTranslation from "../hooks/useUpdateTranslation";
 import LocationInformation from "../components/locationDetails/LocationInformation";
+import MapImage from "../components/locationDetails/MapImage";
+import Promotion from "../components/locationDetails/Promotion";
 import {
   AnalyticsProvider,
   AnalyticsScopeProvider,
@@ -86,6 +88,8 @@ export const config: TemplateConfig = {
       "geomodifier",
       "yextDisplayCoordinate",
       "c_photoCategories",
+      "c_mapImage",
+      "c_promotionalProducts",
       /*Banner*/
       //"c_bannerImage",
       //"c_bannerTitle",
@@ -362,6 +366,7 @@ const Location: Template<ExternalApiRenderData> = ({
     timezone,
     c_relatedFaqs,
     c_photoCategories,
+    c_promotionalProducts,
     //c_aboutImages,
     c_faqsTitle,
     c_title,
@@ -370,6 +375,7 @@ const Location: Template<ExternalApiRenderData> = ({
     c_readMore,
     c_canonicalURL,
     c_photoGalleryTitle,
+    c_mapImage,
     //photoGallery,
     geomodifier,
     c_faqsDescription,
@@ -381,7 +387,7 @@ const Location: Template<ExternalApiRenderData> = ({
     dm_directoryParents,
     dm_directoryChildren
   } = document;
-  console.log(c_photoCategories,"gallery");
+  //console.log(c_promotionalProducts,"gallery");
   let templateData = { document: document, __meta: __meta };
   //const { t, i18n } = useTranslation();
   let hoursSchema = [];
@@ -429,6 +435,7 @@ const Location: Template<ExternalApiRenderData> = ({
   // } else {
   //   url = `${document.slug.toString()}.html`;
   // }
+  //console.log(name,"name");
   const { t, i18n } = useTranslation();
   i18n.changeLanguage(document.meta.locale);
   useUpdateTranslation(_site, document.meta.locale);
@@ -543,11 +550,11 @@ const Location: Template<ExternalApiRenderData> = ({
               </p>
             </div>
           </div> */}
-          {/* <BreadCrumbs
+           <BreadCrumbs
           name={name}
           parents={dm_directoryParents}
           address={address}
-        ></BreadCrumbs> */}
+        ></BreadCrumbs> 
           {/* <div className="store-time text-5xl text-center font-semibold mb-4">
             {hours && (
               <OpenCloseStatus
@@ -565,6 +572,11 @@ const Location: Template<ExternalApiRenderData> = ({
             hours={hours}
             additionalHoursText={additionalHoursText}
             site={_site}
+            name={name}
+          />
+          <MapImage image={c_mapImage}
+          coords={yextDisplayCoordinate}
+          address={address}
           />
 
           <div className="mt-8 md:mt-10">
@@ -583,7 +595,12 @@ const Location: Template<ExternalApiRenderData> = ({
             photoGalleryTitle={c_photoGalleryTitle}
           />
           )}
-
+            {c_promotionalProducts  && (
+          <Promotion
+            promo={c_promotionalProducts}
+            
+          />
+          )}
           {/* {c_faqsTitle && c_relatedFaqs && (
             <div className="mt-5 md:mt-10">
               <Faq prop={c_relatedFaqs} faq_title={c_faqsTitle} />

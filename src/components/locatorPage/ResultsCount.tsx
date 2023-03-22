@@ -1,6 +1,7 @@
 import { useSearchState } from "@yext/search-headless-react";
 import classNames from 'classnames';
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 import { CompositionMethod, useComposedCssClasses } from '../../hooks/useComposedCssClasses';
 
 interface ResultsCountCssClasses {
@@ -10,7 +11,7 @@ interface ResultsCountCssClasses {
 }
 
 const builtInCssClasses: ResultsCountCssClasses = {
-  container: 'pb-2 md:pb-4 totalresult',
+  container: 'totalresult ',
   text: 'text-sm',
   number: 'font-medium'
 }
@@ -45,18 +46,19 @@ export function ResultsCountDisplay({
   cssCompositionMethod
 }: ResultsCountConfig): JSX.Element | null {
   const cssClasses = useComposedCssClasses(builtInCssClasses, customCssClasses, cssCompositionMethod);
+  const { t, i18n } = useTranslation();
   if (resultsLength === 0) {
     return null;
   }
 
   const messageArray = [
-    'Showing ',
+    `${t("Showing ")}`,
     1,
-    ' to ',
+    `${t(" to ")}`,
     offset + resultsLength,
-    ' of ',
+    `${t(" of ")}`,
     resultsCount,
-    ' Results'
+    `${t(" Results")}`,
   ];
 
   const spanArray = messageArray.map((value, index) => {

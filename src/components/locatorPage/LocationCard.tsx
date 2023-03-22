@@ -10,11 +10,13 @@ import {
   formatPhoneNumber,
   formatPhoneNumberIntl,
 } from "react-phone-number-input";
-import OpenCloseStatus from "../../components/commons/OpenCloseStatus";
+import OpenCloseStatus from "..//../components/commons/OpenCloseStatus";
 import Phone from "../commons/phone";
 import { svgIcons } from "../../svg icons/svgIcon";
 import { Data } from "@react-google-maps/api";
+import { useTranslation } from "react-i18next";
 import { slugify, defaultTimeZone  } from "../../config/globalConfig";
+import i18n from "../../types/i18n";
 
 /**
  * 
@@ -87,15 +89,16 @@ const LocationCard: CardComponent<Location> = ({ result }) => {
    */
   var url = "";
   if (!result.rawData.slug) {
-    let slugString = result.rawData?.id + "-" + result.rawData?.name;
+    let slugString = result.rawData?.id + " " + result.rawData?.name;
     let slug = slugify(slugString);
-    url = `${slugString}.html`;
+    url = `${slug}.html`;
   } else {
     url = `${result.rawData.slug.toString()}.html`;
   }
 
-  
 
+  
+  const { t, i18n } = useTranslation();
   /**
    * LocationCard component which returns the HTML of Locator Page Listing.
    */
@@ -108,7 +111,7 @@ const LocationCard: CardComponent<Location> = ({ result }) => {
         <h3 className="onhighLight">
           <Link href={`${url}`}>{result.rawData.name} </Link>
         </h3>
-        <p className="miles">{metersToMiles(result.distance ?? 0)} miles</p>
+        <p className="miles flex">{metersToMiles(result.distance ?? 0)} {t("miles")} <span className="pl-2 pt-2">{svgIcons.miles}</span></p>
       </div>
 
       <Address address={address} />
@@ -117,8 +120,7 @@ const LocationCard: CardComponent<Location> = ({ result }) => {
         <>
           {Object.keys(result.rawData.hours).length > 0 ? (
             <>
-              <div className="OpenCloseStatus icon-row">
-                <div className="icon">{svgIcons.openclosestatus}</div>
+              <div className="OpenCloseStatus">
                 {hours && hours?.reopenDate ?
                 <div>
                   <OpenCloseStatus
@@ -154,36 +156,13 @@ const LocationCard: CardComponent<Location> = ({ result }) => {
       ) : (
         <></>
       )}
-    
-
-
+  
       <div className="buttons gap-y-[2px] sm:gap-y-2.5">
       <div className="ctaBtn">
           <Link className="onhighLight button before-icon" href={`${url}`}>
-            VIEW DETAIL
+           {t("View Details")}
           </Link>
-        </div>
-        <div className="ctaBtn">
-          <Link
-            data-ya-track="getdirections"
-            eventName={`getdirections`}
-            className="onhighLight direction button before-icon"
-            onClick={() => getDirectionUrl(result.rawData)}
-            href="javascript:void(0);"
-            rel="noopener noreferrer"
-            //conversionDetails={conversionDetails_direction}
-          >
-            {c_getDirections ? (
-              <>
-                {svgIcons.GetDirection}
-                {c_getDirections}
-              </>
-            ) : (
-              <>DIRECTIONS </>
-            )}
-          </Link>
-        </div>
-       
+        </div>    
       </div>
     </div>
   );
