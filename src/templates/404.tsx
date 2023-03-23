@@ -34,7 +34,7 @@ export const config: TemplateConfig = {
       
     ],
     localization: {
-      locales: ["fr-FR","en_GB","it-IT","ja-JP","de-DE"],
+      locales: ["en_GB"],
       primary: false
     },
   },
@@ -42,11 +42,10 @@ export const config: TemplateConfig = {
 
 // The path must be exactly 404.html
 export const getPath: GetPath<TemplateProps> = ({document}) => {
-  let url = `${document.meta.locale}/404.html`;
-  if (document.meta.locale === "en_GB") {
-    url = `404.html`;
-  }
-  console.log(url,"url")
+  let url
+    url = `/404.html`;
+  
+  //console.log(url,"url")
   return url;
 
 };

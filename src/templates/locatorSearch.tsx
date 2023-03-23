@@ -78,7 +78,7 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
   if (document.meta.locale === "en_GB") {
     url = `index.html`;
   }
-  console.log(url, "url");
+  //console.log(url, "url");
   return url;
 };
 
