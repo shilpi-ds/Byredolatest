@@ -42,8 +42,15 @@ export const config: TemplateConfig = {
 
 // The path must be exactly 404.html
 export const getPath: GetPath<TemplateProps> = ({document}) => {
-  return "/" +document.meta.locale+"/404.html";
+  let url = `${document.meta.locale}/404.html`;
+  if (document.meta.locale === "en_GB") {
+    url = `404.html`;
+  }
+  console.log(url,"url")
+  return url;
+
 };
+
 //console.log(document.meta.locale);
 
 // Add a title to the page
