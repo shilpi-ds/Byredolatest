@@ -72,6 +72,15 @@ const FourOhFour: Template<TemplateRenderProps> = ({
   document,
 }) => {
   const { _site } = document;
+
+  var currentUrl = ""
+  const myArray = path.split("/");
+  currentUrl = myArray && myArray[1]
+  //console.log(currentUrl,"CURRENT")
+  const updatelocale = (locale: any) => {
+    //console.log(locale,"test");
+   return (window.location.pathname = `${locale}/${currentUrl}`);
+  };
   return (
     <>
        {/* <JsonLd<FourOhFour>
@@ -135,14 +144,17 @@ const FourOhFour: Template<TemplateRenderProps> = ({
         </div>
       </div>
 
-      {/* <Footer
+      <Footer
         footerHelpSection={_site.c_footerHelpSection}
         servicesFooter={_site.c_servicesFooter}
         footerStoreLocator={_site.c_footerStoreLocator}
         customerCare={_site.c_customerCare}
         phone={_site.mainPhone}
         emailAddress={_site.c_emailAddress}
-      /> */}
+        path={updatelocale}
+            _site={_site}
+            
+      />
     </>
   );
 };

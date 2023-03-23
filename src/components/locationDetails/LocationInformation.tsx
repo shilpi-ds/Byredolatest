@@ -22,9 +22,10 @@ type props = {
   additionalHoursText: any;
   site:any;
   name:any;
+  services:any;
 };
 const LocationInformation = (data: props) => {
-  console.log(data);
+  //console.log(data,"sjfhjsdhfsh");
   const [modalIsOpen, setIsOpen] = useState(false);
 //console.log(data,"data");
   let subtitle: any;
@@ -161,6 +162,17 @@ const LocationInformation = (data: props) => {
                   </Link>
                 </div>
               </div>
+              <div><ul>
+{data.services?.map((element:any) => (     
+    
+      <li>
+         {element.name}
+     </li>
+      
+    ))
+}
+</ul>
+</div>
             </div>
 
             {data?.prop && (

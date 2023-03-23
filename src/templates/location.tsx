@@ -103,6 +103,8 @@ export const config: TemplateConfig = {
       //"c_aboutImages",
       /*PhotoGallery*/
       "c_photoGalleryTitle",
+      //"c_locationServices",
+      "c_locationServices.name",
       //"photoGallery",
 
       /*FAQ's*/
@@ -155,8 +157,9 @@ export const config: TemplateConfig = {
  */
 
 var url = ""; /** current detail page url */
-
+//console.log(document);
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
+  //console.log(document,"doc");
   if (!document.slug) {
     let slugString = document.id + "-" + document.name;
     slugString = slugify(slugString);
@@ -367,6 +370,8 @@ const Location: Template<ExternalApiRenderData> = ({
     c_relatedFaqs,
     c_photoCategories,
     c_promotionalProducts,
+    c_locationServices,
+   
     //c_aboutImages,
     c_faqsTitle,
     c_title,
@@ -387,6 +392,7 @@ const Location: Template<ExternalApiRenderData> = ({
     dm_directoryParents,
     dm_directoryChildren
   } = document;
+  //console.log(c_locationServices,"services");
   //console.log(c_promotionalProducts,"gallery");
   let templateData = { document: document, __meta: __meta };
   //const { t, i18n } = useTranslation();
@@ -573,6 +579,7 @@ const Location: Template<ExternalApiRenderData> = ({
             additionalHoursText={additionalHoursText}
             site={_site}
             name={name}
+            services={c_locationServices}
           />
           <MapImage image={c_mapImage}
           coords={yextDisplayCoordinate}
