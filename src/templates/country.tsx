@@ -85,7 +85,7 @@ export const config: TemplateConfig = {
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
   currentUrl = "/" +document.meta.locale+"/"+ document.slug?.toString() + ".html";
-  return "/" +document.meta.locale+"/"+ document?.slug?.toString() + ".html";
+  return "/" +document.meta.locale+"/"+ document.slug?.toString() + ".html";
   //return 'dm.html';
 };
 

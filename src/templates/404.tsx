@@ -2,6 +2,11 @@ import * as React from "react";
 import favicon from "../images/favicon.png"
 import Header from "../components/layouts/header";
 import Footer from "../components/layouts/footer";
+import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import useUpdateTranslation from "../hooks/useUpdateTranslation";
+import "../types/i18n.tsx";
+import RtfConverter from "@yext/rtf-converter";
 import {
   TemplateProps,
   TemplateRenderProps,
@@ -75,7 +80,13 @@ const FourOhFour: Template<TemplateRenderProps> = ({
   path,
 }) => {
   const { _site } = document;
-
+  if (_site.c_fourDes) {
+    var Desc = RtfConverter.toHTML(_site.c_fourDes);
+  }
+  const { t, i18n } = useTranslation();
+  i18n.changeLanguage(document.meta.locale);
+  useUpdateTranslation(_site, document.meta.locale);
+console.log(_site,"site");
   var currentUrl = ""
   const myArray = path.split("/");
   currentUrl = myArray && myArray[1]
@@ -102,22 +113,18 @@ const FourOhFour: Template<TemplateRenderProps> = ({
 
       <div className="content-list ">
         <div className="container mx-96">
-       <h1 className="text-2xl">Our apologies, we we are not able to find the page you are looking for.</h1>        
+       <h1 className="text-2xl">{_site.c_fourTitle}.</h1>        
        <br />  
-          <p className="text-lg font-semibold">
-            Go back to our
-          <Link className="p-2 font-semibold underline" href="https://www.byredo.com/eu_en/">
-          homepage
-          </Link>
-          or search what you are looking for.
-          </p>
+       <div className="leading-7 text-base text-gray-700 about-content"
+                    dangerouslySetInnerHTML={{ __html: Desc ? Desc : "" }}
+                  ></div>
           <br />
           <form className="max-w-sm px-0">
             <div className="relative mb-4">
                 
                 <input
                     type="text"
-                    placeholder="Search"
+                    placeholder={t("Search")}
                     className="w-full py-5 pl-3 pr-4 text-gray-100 text-2xl border rounded-none outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
                 />
                 <svg
@@ -137,11 +144,21 @@ const FourOhFour: Template<TemplateRenderProps> = ({
             </div>
         </form>
           <div className="">
-           <div className="text-2xl pb-3 font-semibold">Go to</div>  
+           <div className="text-2xl pb-3 font-semibold">{t("Go to")}</div>  
             <ul className="text-lg leading-9 font-semibold">
-              <li> <Link href="https://www.byredo.com/eu_en/perfume/best-sellers/">Best Sellers</Link></li>
+            {_site.c_fourLinks?.map((element:any) => (     
+    
+    <li>
+      {element?.link && element?.label && (
+       <a href={element.link}>{element.label}</a>
+      )}
+   </li>
+    
+  ))
+}
+              {/* <li> <Link href="https://www.byredo.com/eu_en/perfume/best-sellers/">Best Sellers</Link></li>
               <li> <Link href="https://www.byredo.com/eu_en/perfume/">Perfume</Link></li>
-              <li> <Link href="https://www.byredo.com/eu_en/home-fragrance/">Home Fragrance</Link></li>
+              <li> <Link href="https://www.byredo.com/eu_en/home-fragrance/">Home Fragrance</Link></li> */}
             </ul>
           </div>
         </div>

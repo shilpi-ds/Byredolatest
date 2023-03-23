@@ -43,7 +43,12 @@
     "c_temporarilyClosed",
     "c_miles",
     "c_storeHours",
-    "c_selectLanguage"
+    "c_selectLanguage",
+   
+    "c_fourTitle",
+    "c_fourDes",
+    "c_fourLinks"
+
   ],
   "localization": {
     "locales": ["en_GB","fr-FR","it-IT","ja-JP","de-DE"],

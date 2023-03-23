@@ -36,6 +36,9 @@ const resources = {
       "Home" : "Home",
       "Store Locator" : "Store Locator",
       "No Locations Found" : "No Locations Found",
+      "Search" : "Search",
+      "Go to" : "Go to",
+
     },
   },
    ja: {
@@ -70,6 +73,8 @@ const resources = {
       "Home" : "家",
       "Store Locator" : "店舗検索機能",
       "No Locations Found" : "場所が見つかりません",
+      "Search" : "捜索",
+      "Go to" : "行きます",
     },
   },
   de: {
@@ -103,6 +108,8 @@ const resources = {
       "Home" : "Heim",
       "Store Locator" : "Händlersuche",
       "No Locations Found" : "Kein Standort gefunden",
+      "Search" : "Suchen",
+      "Go to" : "Gehe zu",
     },
   },
   it: {
@@ -136,6 +143,8 @@ const resources = {
       "Home" : "Casa",
       "Store Locator" : "Localizzatore di negozi",
       "No Locations Found" : "Nessuna posizione trovata",
+      "Search" : "Ricerca",
+      "Go to" : "Vai a",
     },
   },
   fr: {
@@ -169,6 +178,8 @@ const resources = {
       "Home" : "Maison",
       "Store Locator" : "Localisateur de magasin",
       "No Locations Found" : "Aucun emplacement trouvé",
+      "Search" : "Rechercher",
+      "Go to" : "Atteindre",
     },
   },
 };
