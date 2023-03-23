@@ -28,7 +28,7 @@ export const config: TemplateConfig = {
       "name" 
     ],
     localization: {
-      locales: ["en_GB"],
+      locales: ["fr-FR","en_GB","it-IT","ja-JP","de-DE"],
       primary: false
     },
   },
