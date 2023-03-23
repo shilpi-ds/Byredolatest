@@ -35,9 +35,10 @@ export const config: TemplateConfig = {
 };
 
 // The path must be exactly 404.html
-export const getPath: GetPath<TemplateProps> = () => {
-  return "/404.html";
+export const getPath: GetPath<TemplateProps> = ({document}) => {
+  return "/" +document.meta.locale+"/404.html";
 };
+
 
 // Add a title to the page
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
