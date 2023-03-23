@@ -25,7 +25,8 @@ export const config: TemplateConfig = {
       "id",
       "uid",
       "meta",
-      "name" 
+      "name"
+      
     ],
     localization: {
       locales: ["fr-FR","en_GB","it-IT","ja-JP","de-DE"],
@@ -38,7 +39,7 @@ export const config: TemplateConfig = {
 export const getPath: GetPath<TemplateProps> = ({document}) => {
   return "/" +document.meta.locale+"/404.html";
 };
-
+//console.log(document.meta.locale);
 
 // Add a title to the page
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
@@ -71,6 +72,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
 // Template that will show as the page
 const FourOhFour: Template<TemplateRenderProps> = ({
   document,
+  path,
 }) => {
   const { _site } = document;
 
