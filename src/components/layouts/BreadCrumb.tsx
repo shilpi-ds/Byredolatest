@@ -8,6 +8,7 @@ type data = {
   address: any;
 };
 const BreadCrumbs = (props: data) => {
+  //console.log(props,"bread");
   const [list, setList] = React.useState(null);
   var breadcrumbs;
   var data: any = [];

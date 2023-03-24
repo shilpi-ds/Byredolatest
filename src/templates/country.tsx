@@ -268,7 +268,7 @@ const country: Template<TemplateRenderProps> = ({
 
   const { doc } =document;
 
-console.log(document.meta.locale, "locale");
+//console.log(document.meta.locale, "locale");
   const childrenDivs = dm_directoryChildren ? dm_directoryChildren.map((entity: any) => {
     let detlslug;
 
@@ -315,7 +315,7 @@ if (typeof entity.dm_directoryChildren != "undefined") {
     })
   }
   else {
-    detlslug = "/"+slug+"/"+entity.slug+".html";
+    detlslug = "/"+document.meta.locale+"/"+slug+"/"+entity.slug+".html";
     //console.log(detlslug,"chk");
   }
 }
