@@ -354,9 +354,19 @@ const Country: Template<TemplateRenderProps> = ({
           })
         }
         else {
-          detlslug = slug + "/" + entity.slug + "";
-        }
+          let detlslug1 = "";
 
+          if (!entity.slug) {
+            let slugString = entity.id + " " + entity.name;
+            let slug = slugify(slugString);
+            detlslug1 = `${slug}`;
+          } else {
+            detlslug1 = `${entity.slug.toString()}`;
+          }
+
+          detlslug = slug + "/" + detlslug1;
+        }
+console.log(detlslug,"sluggggggggg");
         return (
           <li className=" storelocation-category">
             <a
