@@ -8,7 +8,6 @@ type data = {
   address: any;
 };
 const BreadCrumbs = (props: data) => {
-  //console.log(props,"bread");
   const [list, setList] = React.useState(null);
   var breadcrumbs;
   var data: any = [];
@@ -109,11 +108,8 @@ const BreadCrumbs = (props: data) => {
     <div className="breadcrumb">
       <div className="container">
         <ul>
-          <li className="home">
+          <li className="home-li">
             <Link href="/index.html">Home</Link>
-          </li>
-          <li className="locator">
-            <Link href="/index.html">Locator</Link>
           </li>
           {list && (
             list)

@@ -47,7 +47,15 @@
    
     "c_fourTitle",
     "c_fourDes",
-    "c_fourLinks"
+    "c_fourLinks",
+    "c_home",
+    "c_sunday",
+    "c_monday",
+    "c_tuesday",
+    "c_wednesday",
+    "c_thursday",
+    "c_friday",
+    "c_saturday"
 
   ],
   "localization": {

@@ -191,7 +191,7 @@ const LocationInformation = (data: props) => {
                             <Hours
                               hours={data.hours}
                               timezone={timezone ? timezone : defaultTimeZone}
-                              additionalHoursText={data.additionalHoursText}
+                              additionalHoursText={data.additionalHoursText} site={data.site}
                             />
                             {data?.prop?.holidayHours && isShow && !data?.prop?.reopenDate && (
                               <>

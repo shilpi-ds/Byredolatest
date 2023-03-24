@@ -28,54 +28,41 @@ import {
   AnalyticsEnableTrackingCookie,
 } from "../config/globalConfig";
 
-var currentUrl = "";
+
+/**
+ * Required when Knowledge Graph data is used for a template.
+ */
 export const config: TemplateConfig = {
   stream: {
-    $id: "country",
-    // filter: {
-    //   savedFilterIds: [],
-    // },
+    $id: "region",
+    // Specifies the exact data that each generated document will contain. This data is passed in
+    // directly as props to the default exported function.
     fields: [
       "id",
       "uid",
       "meta",
       "name",
-      "description",
-      "slug",
       "address",
-
-      "c_canonicalURL",
-      "c_metaDescription",
-      "c_metaTitle",
-      "c_robotsTag",
-
+      "slug",
+      "dm_directoryParents.name",
+      "dm_directoryParents.slug",
+      "dm_directoryParents.dm_directoryChildrenCount",
+      "dm_directoryParents.meta.entityType",
       "dm_directoryChildren.name",
-      "dm_directoryChildren.id",
+      "dm_directoryChildren.address",
       "dm_directoryChildren.slug",
       "dm_directoryChildren.dm_directoryChildrenCount",
-      "dm_directoryChildren.meta.entityType",
-
       "dm_directoryChildren.dm_directoryChildren.name",
       "dm_directoryChildren.dm_directoryChildren.id",
       "dm_directoryChildren.dm_directoryChildren.slug",
-      "dm_directoryChildren.dm_directoryChildren.dm_directoryChildrenCount",
-      "dm_directoryChildren.dm_directoryChildren.meta.entityType",
-
-      "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.name",
-      "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.id",
-      "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.slug",
-      "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.meta.entityType",
-
-      "dm_directoryParents.id",
-      "dm_directoryParents.name",
-      "dm_directoryParents.slug",
-      "dm_directoryParents.meta.entityType",
-   
+      "dm_directoryChildren.dm_directoryChildren.address"
     ],
+    // Defines the scope of entities that qualify for this stream.
     filter: {
-      entityTypes: ["ce_country"],
+      entityTypes: ["ce_region"],
       
     },
+    // The entity language profiles that documents will be generated for.
     localization: {
       locales: ["fr-FR","en_GB","it-IT","ja-JP","de-DE"],
       primary: false,
@@ -83,20 +70,18 @@ export const config: TemplateConfig = {
   },
 };
 
-export const getPath: GetPath<TemplateProps> = ({ document }) => {
- 
-  let url = "";
 
+
+export const getPath: GetPath<TemplateProps> = ({ document }) => {
+  let url = "";
   let slugString = document.id + " " + document.name;
-  //console.log(slugString,"sluggggg");
   let slug = slugify(slugString);
 
   if (typeof document.slug == "undefined") {
 
     let slugStrings: any = [];
     if (typeof document.dm_directoryParents != "undefined") {
-      document.dm_directoryParents?.map((e: any, index: number) => {
-
+      document.dm_directoryParents?.map((e: any) => {
         if (e.meta.entityType.id != "ce_root") {
           if (typeof e.slug == "undefined") {
             slugStrings.push(slugify(e.name));
@@ -104,33 +89,29 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
             slugStrings.push(e.slug);
           }
         }
-
       });
+      // console.log(slugString,"slugstring")
     }
 
     if (slugStrings.length > 0) {
-      url = `${slugStrings.join("/")}${slug}`;
+      url = `${slugStrings.join("/")}/${slug}`;
     } else {
       url = `${slug}`;
     }
 
-  } 
-   else {
-     let slugStrings: any = [];
-
-     if (typeof document.dm_directoryParents != "undefined") {
-       document.dm_directoryParents?.map((e: any) => {
-
-         if (e.meta.entityType.id != "ce_root") {
-           if (typeof e.slug == "undefined") {
-             slugStrings.push(slugify(e.name));
-           } else {
-             slugStrings.push(e.slug);
-           }
+  } else {
+    let slugStrings: any = [];
+    if (typeof document.dm_directoryParents != "undefined") {
+      document.dm_directoryParents?.map((e: any) => {
+        if (e.meta.entityType.id != "ce_root") {
+          if (typeof e.slug == "undefined") {
+            slugStrings.push(slugify(e.name));
+          } else {
+            slugStrings.push(e.slug);
+          }
         }
-
-       });
-     }
+      });
+    }
 
     if (slugStrings.length > 0) {
       url = `${slugStrings.join("/")}/${document.slug.toString()}`;
@@ -138,27 +119,28 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
       url = `${document.slug.toString()}`;
     }
 
-   }
-//console.log(url,"url")
+  }
   return document.meta.locale+"/"+url+".html";
-  
 
 };
+
+// export const getRedirects: GetRedirects<TemplateProps> = ({ document }) => {
+//   return [`index-old/${document.id.toString()}`];
+// };
+
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   relativePrefixToRoot,
   path,
   document,
-
 }): HeadConfig => {
-
   let url = "";
   if (!document.slug) {
     let slugString = document.id + " " + document.name;
     let slug = slugify(slugString);
     url = `${slug}.html`;
   } else {
-    url = `${document?.slug?.toString()}.html`;
+    url = `${document.slug.toString()}.html`;
   }
   // <meta name="google-site-verification" content="WIqhwAw2ugRAKEYRRqis1ZfUBbnWe_AXSoDltHceCbI" />
   let metaDescription = document.c_metaDescription
@@ -301,81 +283,23 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   };
 };
 
-const Country: Template<TemplateRenderProps> = ({
+const State: Template<TemplateRenderProps> = ({
   relativePrefixToRoot,
   path,
   document,
-
 }) => {
-  const { dm_directoryChildren, address, dm_directoryParents } = document;
-  const { name, _site, slug } = document;
+  const {
+   
+    _site,
+   
+    name,
+    slug,
+    address,
+   
+    dm_directoryParents,
+    dm_directoryChildren
+  } = document;
 
-  let ce_cities: any = [];
-  const childrenDivs = dm_directoryChildren ? dm_directoryChildren.map((entity: any) => {
-    let detlslug;
-    var country: any = entity?.address?.countryCode?.toLowerCase();
-    if (typeof entity.dm_directoryChildren != "undefined") {
-      if (entity.meta.entityType.id !== 'ce_city') {              
-        if (entity.dm_directoryChildrenCount == 1) {
-          entity.dm_directoryChildren.map((res: any) => {
-
-            let detlslug1 = "";
-
-            if (!res.slug) {
-              let slugString = res.id + " " + res.name;
-              let slug = slugify(slugString);
-              detlslug1 = `${slug}`;
-            } else {
-              detlslug1 = `${res.slug.toString()}`;
-            }
-            if (res.meta.entityType.id == 'ce_city') {
-              detlslug1 = country+"/"+detlslug1;
-            } else {
-              detlslug1 = detlslug1;
-            }
-
-        
-
-            res.dm_directoryChildren ? res.dm_directoryChildren.map((detl: any) => {
-
-              if (!detl.slug) {
-                let slugString = detl.id + " " + detl.name;
-                let slug = slugify(slugString);
-                detlslug1 = `${slug}`;
-              } else {
-                detlslug1 = `${detl.slug.toString()}`;
-              }
-
-              detlslug = detlslug1;
-
-            }) : detlslug = detlslug1;
-
-
-          })
-        }
-        else {
-          detlslug = slug + "/" + entity.slug + "";
-        }
-
-        return (
-          <li className=" storelocation-category">
-            <a
-              key={entity.slug}
-              href={"/" +document.meta.locale+ "/" + detlslug+".html"}
-            >
-              {entity.name} ({entity.dm_directoryChildrenCount})
-            </a>
-          </li>
-        )
-
-      }else{
-        ce_cities.push(entity);
-      }
-
-    }
-
-
-  }) : null;
   var currentUrl = ""
   const myArray = path.split("/");
   currentUrl = myArray && myArray[1]
@@ -384,75 +308,68 @@ const Country: Template<TemplateRenderProps> = ({
     //console.log(locale,"test");
    return (window.location.pathname = `${locale}/${currentUrl}`);
   };
-  
-  /***
-   * for city when not have region in locations
-   * 
-   */
-  
+//console.log();
+  const childrenDivs = dm_directoryChildren ? dm_directoryChildren.map((entity: any) => {
+    let detlslug;
 
-  const citiesList = ce_cities.map((city: any) => {
+    //const cntry =entity.address.countryCode;
+    if (typeof entity.dm_directoryChildren != "undefined") {
 
-    let cityslug = "";
+      if (entity.dm_directoryChildrenCount == 1) {
+        entity.dm_directoryChildren.map((res: any) => {
 
-    if(city.dm_directoryChildrenCount == 1){
+          let detlslug1 = "";
 
-      city.dm_directoryChildren ? city.dm_directoryChildren.map((location: any) => {
+          if (!res.slug) {
+            let slugString = res.id + " " + res.name;
+            let slug = slugify(slugString);
+            detlslug1 = `${slug}`;
+          } else {
+            detlslug1 = `${res.slug.toString()}`;
+          }
 
-        if (!location.slug) {
-          let slugString = location.id + " " + location.name;
-          let slug = slugify(slugString);
-          cityslug = `${slug}`;
-        } else {
-          cityslug = `${location.slug.toString()}`;
-        }
-      }) : "";
-    
-    }else{  
-      if (!city.slug) {
-        let slugString = city.id + " " + city.name;
-        let slug = slugify(slugString);
-        cityslug = `${slug}`;
+          detlslug = detlslug1;
+
+        })
       } else {
-        cityslug = `${city.slug.toString()}`;
+        detlslug = "/" + slug + "/" + entity.slug + "";
       }
-      if (city.meta.entityType.id == 'ce_city') {
-        cityslug = document.meta.locale+"/" + cityslug+".html";
-      } 
-   }
+    }
 
     return (
       <li className=" storelocation-category">
         <a
-          key={city.slug}
-          href={ "/" + cityslug}
+          key={entity.slug}
+          href={"/" +document.meta.locale+"/"+detlslug+".html"}
         >
-          {city.name} ({city.dm_directoryChildrenCount})
+          {entity.name} ({entity.dm_directoryChildrenCount})
         </a>
       </li>
     )
+  }) : null;
 
-  });
+ 
 
+  
   return (
     <>
-   <Header
+         <Header
             ByredoLogo={_site.c_byradoLogo}
             ByredoLinks={_site.c_headerMenus}
           />
-      <BreadCrumbs
-        name={name}
-        parents={dm_directoryParents}
-        address={address}
-      ></BreadCrumbs>
+       
 
+         <BreadCrumbs
+          name={name}
+          parents={dm_directoryParents}
+          address={address}
+        ></BreadCrumbs>
 
-      <div className="content-list">
+<div className="content-list">
         <div className="container">
           <ul className="region-list">
             {childrenDivs}
           </ul>
-          {ce_cities.length > 0 ? (<><h2 className="sec-title text-center mt-5">{name}</h2><ul className="city-list region-list"> {citiesList}</ul></>) : ""}
         </div>
       </div>
 
@@ -466,9 +383,7 @@ const Country: Template<TemplateRenderProps> = ({
             path={updatelocale}
             _site={_site}
           />
-
     </>
-  );
-};
-
-export default Country;
+  )
+}
+export default State;

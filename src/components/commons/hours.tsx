@@ -9,6 +9,7 @@ type Hours = {
   additionalHoursText?: any;
   timezone?: any;
   reopenDate?: any;
+  site:any;
 };
 
 interface Week extends Record<string, any> {
@@ -240,14 +241,14 @@ const DayRow = (props: DayRow) => {
         <td className="capitalize text-left pl-1 pr-4 dayName">
           <span>
             <b className="checked"></b>
-            {t(dayName)} <b className="block text-sm font-normal">(Holiday)</b>
+            {dayName} <b className="block text-sm font-normal">(Holiday)</b>
           </span>
         </td>
       ) : (
         <td className="capitalize text-left pl-1 pr-4 dayName">
           <span>
             <b className="checked"></b>
-            {t(dayName)}
+            {dayName}
           </span>
         </td>
       )}

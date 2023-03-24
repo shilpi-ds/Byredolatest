@@ -39,6 +39,9 @@ const useUpdateTranslation = (data:any, locale:any) => {
     //i18n.addResource(locale, 'translation', 'english', data.c_english);
    // i18n.addResource(locale, 'translation', 'french', data.c_french);
     i18n.addResource(locale, 'translation', 'Select Language', data.c_selectLanguage);
+    i18n.addResource(locale, 'translation', 'Sunday', data.c_sunday);
+   
+  
 };
 
 export default useUpdateTranslation;
