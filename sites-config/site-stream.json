@@ -55,7 +55,11 @@
     "c_wednesday",
     "c_thursday",
     "c_friday",
-    "c_saturday"
+    "c_saturday",
+    "c_cookieText",
+    "c_cookieButton",
+    "c_cookiePolicy",
+    "c_cookieTextAfter"
 
   ],
   "localization": {

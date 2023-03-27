@@ -4,7 +4,7 @@ import { cookieText, cookieText1, cookieUrl } from "../../config/globalConfig";
 import LocalesDropdown from "../../components/commons/LanguageDropdown";
 import { Link } from "@yext/pages/components";
 import { svgIcons } from "../../svg icons/svgIcon";
-
+import RtfConverter from "@yext/rtf-converter";
 type props = {
   footerHelpSection: any;
   servicesFooter: any;
@@ -26,7 +26,10 @@ const Footer = (props: any) => {
     phone,
     path,_site
   } = props;
-
+console.log(_site,"siteeeeeeeee");
+// if (_site.c_cookieText) {
+//   var Desc = RtfConverter.toHTML(_site.c_cookieTex);
+// }
   return (
     <>
       <div className="subfooter-sec">
@@ -111,17 +114,18 @@ const Footer = (props: any) => {
       </div>
 
       <CookieConsent
-        buttonText="Accept All Cookies"
+        buttonText={_site.c_cookieButton.label}
         buttonStyle={{
           marginLeft: "100px",
         }}
       >
+         
         <p>
-          {cookieText}
-          <Link className="text-cookies-link p-2 font-bold" href={cookieUrl}>
-            cookie policy
+        {_site.c_cookieText}
+          <Link className="text-cookies-link p-2 font-bold" href={_site.c_cookiePolicy.link}>
+          {_site.c_cookiePolicy.label}
           </Link>
-          {cookieText1}.
+          {_site.c_cookieTextAfter}
         </p>
       </CookieConsent>
     </>

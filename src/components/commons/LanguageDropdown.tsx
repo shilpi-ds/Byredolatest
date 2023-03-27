@@ -23,17 +23,17 @@ function LocalesDropdown(props: any) {
     {
       props.updatelocale("fr-FR");
      // $('.language option[value=fr-FR]').attr('selected',true);
-      $('.language').val('fr-FR').prop('selected', true);
+      //$('.language').val('fr-FR').prop('selected', true);
     }
     else if(url=="Japan" && lang=="en-GB")
     {
       props.updatelocale("ja-JP");
-      $('.language').val('ja-JP').prop('selected', true);
+      //$('.language').val('ja-JP').prop('selected', true);
     }
     else  if(url=="United Kingdom" && lang=="en-GB")
     {
       props.updatelocale("en_GB");
-      $('.language').val('en-GB').prop('selected', true);
+      //$('.language').val('en-GB').prop('selected', true);
     }
   };
 
@@ -52,11 +52,11 @@ function LocalesDropdown(props: any) {
                 })}
 
         </select>
-        <select onChange={onLanguageChange} value={language} className="language">
+        <select onChange={onLanguageChange} value={language} className="language" >
        
          //console.log(e.language);
         {/* <option value="Select Language">Select Language</option> */}
-                  
+        //var selected = (option.value === language) ? 'selected' : 'true';
                     {props.country[section].language?.map((el: any,indd:any) => {
                       //console.log(el);
                               return (
