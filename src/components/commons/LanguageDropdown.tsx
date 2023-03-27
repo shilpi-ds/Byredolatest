@@ -22,14 +22,18 @@ function LocalesDropdown(props: any) {
     if(url=="France" && lang=="en-GB")
     {
       props.updatelocale("fr-FR");
+     // $('.language option[value=fr-FR]').attr('selected',true);
+      $('.language').val('fr-FR').prop('selected', true);
     }
     else if(url=="Japan" && lang=="en-GB")
     {
       props.updatelocale("ja-JP");
+      $('.language').val('ja-JP').prop('selected', true);
     }
     else  if(url=="United Kingdom" && lang=="en-GB")
     {
       props.updatelocale("en_GB");
+      $('.language').val('en-GB').prop('selected', true);
     }
   };
 
