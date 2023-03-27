@@ -6,22 +6,22 @@ import "../../types/i18n.tsx";
 
 function LocalesDropdown(props: any) {
   //console.log(props.country);
-  const [color, setColor] = React.useState("");
-  const onColorChange = (e: any) => props.updatelocale(e.target.value);
+  const [language, setLanguage] = React.useState("");
+  const onLanguageChange = (e: any) => props.updatelocale(e.target.value);
   const { t, i18n } = useTranslation();
-  //const [section, setSection] = useState(0);
+
   const [section, setSection] = useState(0);
-  const [isActive, setIsActive] = useState('section-chat');
+
 
   const handleClick = (e:any) => {
     setSection(e.target.value);
-   // alert(e.target.value);
+    //alert(e.target.label);
   };
-  const [selected, setSelected] = React.useState("");
+
   return (
     <div>
       <form>
-        {/* <select onChange={onColorChange} value={color}> */}
+      
         <select onChange={(e) => {handleClick(e)}}>
         {props.country?.map((e: any,ind:any) => {
           //console.log(e);
@@ -31,17 +31,12 @@ function LocalesDropdown(props: any) {
                     
                   );
                 })}
-          {/* <option>{t("Select Country")}</option>
-          <option value="en-GB">{t("English")}</option>
-          <option value="fr-FR">{t("French")}</option>
-          <option value="it-IT">{t("Italian")}</option>
-          <option value="ja-JP">{t("Japanese")}</option>
-          <option value="de-DE">{t("German")}</option> */}
+
         </select>
-        <select onChange={onColorChange} value={color}>
+        <select onChange={onLanguageChange} value={language}>
        
          //console.log(e.language);
-        
+        <option value="Select Language">Select Language</option>
                   
                     {props.country[section].language?.map((el: any,indd:any) => {
                       //console.log(el);
