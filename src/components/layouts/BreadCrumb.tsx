@@ -91,7 +91,7 @@ const BreadCrumbs = (props: data) => {
       breadcrumbs = data?.map((crumb: any, index: any) => (
         <li key={crumb.slug}>
           <Link
-            href={`${props.site}/${crumb.slug}.html`}
+            href={`/${crumb.slug}.html`}
             rel="noopener noreferrer"
             eventName={"BreadCrumbs" + (index + 1)}
           >
