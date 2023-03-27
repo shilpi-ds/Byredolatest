@@ -90,7 +90,7 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
           }
         }
       });
-      // console.log(slugString,"slugstring")
+       //console.log(slugString,"slugstring")
     }
 
     if (slugStrings.length > 0) {
@@ -120,6 +120,7 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
     }
 
   }
+  //console.log(document.meta.locale+"/"+url,"urlssssss")
   return document.meta.locale+"/"+url+".html";
 
 };

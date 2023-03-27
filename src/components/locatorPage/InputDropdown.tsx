@@ -284,7 +284,7 @@ export default function InputDropdown({
             const value = evt.target.value;
             setLatestUserInput(value);
             onInputChange(value);
-            onInputFocus(value);
+            //onInputFocus(value);
             setChildrenKey(childrenKey + 1);
             dispatch({ type: 'ShowSections' });            
           }}

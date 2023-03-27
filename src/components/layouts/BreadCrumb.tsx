@@ -15,14 +15,85 @@ const BreadCrumbs = (props: data) => {
   React.useEffect(() => {
     setURL(props.parents);
   }, [setList]);
-//console.log(props,"props");
+console.log(props,"props");
   const setURL = (parents: any) => {
     if (parents) {
       for (let i = 0; i < parents.length; i++) {
         if (parents[i].meta.entityType.id == "ce_country") {
+        
+          let url = "";
+
+          let slugString = parents[i].meta.entityType.id + " " + parents[i].name;
+          //console.log(slugString,"sluggggg");
+          let slug = slugify(slugString);
+        
+          if (typeof parents[i].slug == "undefined") {
+        
+            let slugStrings: any = [];
+            if (typeof parents[i].dm_directoryParents != "undefined") {
+              parents[i].dm_directoryParents?.map((e: any, index: number) => {
+        
+                if (e.meta.entityType.id != "ce_root") {
+                  if (typeof e.slug == "undefined") {
+                    slugStrings.push(slugify(e.name));
+                  } else {
+                    slugStrings.push(e.slug);
+                  }
+                }
+        
+              });
+            }
+        
+            if (slugStrings.length > 0) {
+              url = `${slugStrings.join("/")}${slug}`;
+            } else {
+              url = `${slug}`;
+            }
+        
+          } 
+           else {
+             let slugStrings: any = [];
+        
+             if (typeof parents[i].dm_directoryParents != "undefined") {
+              parents[i].dm_directoryParents?.map((e: any) => {
+        
+                 if (e.meta.entityType.id != "ce_root") {
+                   if (typeof e.slug == "undefined") {
+                     slugStrings.push(slugify(e.name));
+                   } else {
+                     slugStrings.push(e.slug);
+                   }
+                }
+        
+               });
+             }
+        
+            if (slugStrings.length > 0) {
+              url = `${slugStrings.join("/")}/${parents[i].slug.toString()}`;
+            } else {
+              url = `${parents[i].slug.toString()}`;
+            }
+        
+           }
+        //console.log(url,"url")
+          //return parents[i].meta.locale+"/"+url+".html";
+
+
+
+
+
+
+
+
+
+
+
+
           data.push({
+
             name: parents[i].name,
-            slug: parents[i].slug,
+            //slug: parents[i].slug,
+            slug: url,
             childrenCount: parents[i].dm_directoryChildrenCount,
           });
         } else if (parents[i]?.meta?.entityType?.id == "ce_region") {
