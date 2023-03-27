@@ -16,9 +16,9 @@ function LocalesDropdown(props: any) {
   const handleClick = (e:any) => {
     setSection(e.target.value);
     var url=e.target[e.target.value].text;
-    alert(e.target[e.target.value].text);
+    //alert(e.target[e.target.value].text);
     var lang=$(".language").val();
-    alert(lang);
+    //alert(lang);
     if(url=="France" && lang=="en-GB")
     {
       props.updatelocale("fr-FR");
