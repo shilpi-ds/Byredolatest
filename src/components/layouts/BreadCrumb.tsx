@@ -6,6 +6,7 @@ type data = {
   name: any;
   parents: any;
   address: any;
+  site: any;
 };
 const BreadCrumbs = (props: data) => {
   const [list, setList] = React.useState(null);
@@ -14,7 +15,7 @@ const BreadCrumbs = (props: data) => {
   React.useEffect(() => {
     setURL(props.parents);
   }, [setList]);
-
+//console.log(props,"props");
   const setURL = (parents: any) => {
     if (parents) {
       for (let i = 0; i < parents.length; i++) {
@@ -90,7 +91,7 @@ const BreadCrumbs = (props: data) => {
       breadcrumbs = data?.map((crumb: any, index: any) => (
         <li key={crumb.slug}>
           <Link
-            href={`${BaseUrl}/${crumb.slug}.html`}
+            href={`${props.site}/${crumb.slug}.html`}
             rel="noopener noreferrer"
             eventName={"BreadCrumbs" + (index + 1)}
           >

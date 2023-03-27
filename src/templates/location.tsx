@@ -560,6 +560,7 @@ const Location: Template<ExternalApiRenderData> = ({
           name={name}
           parents={dm_directoryParents}
           address={address}
+          site={document.meta.locale}
         ></BreadCrumbs> 
           {/* <div className="store-time text-5xl text-center font-semibold mb-4">
             {hours && (
